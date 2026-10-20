@@ -3,9 +3,68 @@
         "id": "case_1",
         "title": "The Locked Room",
         "story": "The Speckled Band",
-        "image": "data/images/case_1.png",
+        "image": "static/scenes/case_1_speckled_band.jpg",
+        "image_alt": "A Victorian bedroom at night: shuttered window, a bell-rope hanging beside the bed, a small grille high on the wall and a dark wardrobe.",
         "intro": "Stoke Moran, April 1883. Helen Stoner's sister died in a bedroom locked from the inside. The windows were barred, the door was bolted, and the chimney was too narrow for a child. Her last words were: 'It was the band! The speckled band!' Two years later, Helen has been moved into that same room, and she has begun to hear a low whistle in the dark.",
+        "teaser": "A sealed bedroom, a dying cry about a speckled band, and a whistle in the night.",
         "objective": "Discover what the speckled band really was.",
+        "watson_greeting": "Stoke Moran, Holmes's old case. Helen Stoner's sister died in this very room, behind a bolted door and barred shutters. Look around, and ask me anything about the case papers.",
+        "hotspots": [
+            {
+                "id": "bell_rope",
+                "name": "The bell-rope",
+                "x": 57.3,
+                "y": 30.0,
+                "observation": "A thick bell-pull hangs beside the pillow. Give it a tug: it rings nothing. It is not attached to any wire, only fastened to a hook just above the little opening of the ventilator.",
+                "note": "The bell-rope is a dummy. It rings nothing and is fixed to a hook next to the ventilator.",
+                "quote": "it is not even attached to a wire"
+            },
+            {
+                "id": "ventilator",
+                "name": "The ventilator",
+                "x": 68.7,
+                "y": 8.5,
+                "observation": "A small grille high on the wall. Strangely, it does not open to the outside air: it leads into the next room, Dr. Roylott's bedroom.",
+                "note": "The ventilator opens into Dr. Roylott's room, not to the outside air.",
+                "quote": "what a fool a builder must be to open a ventilator into another room"
+            },
+            {
+                "id": "bed",
+                "name": "The bed",
+                "x": 60.5,
+                "y": 66.0,
+                "observation": "The bed will not move an inch. It is clamped to the floor, so whoever sleeps here always lies in the same place: beside the rope, beneath the ventilator.",
+                "note": "The bed is clamped to the floor and always sits under the rope and the ventilator.",
+                "quote": "It was clamped to the floor"
+            },
+            {
+                "id": "shutters",
+                "name": "The shuttered window",
+                "x": 19.0,
+                "y": 30.0,
+                "observation": "Old-fashioned shutters with broad iron bars, secured every night. Holmes tried every way to force them open from outside, without success.",
+                "note": "Nobody came in through the window: the shutters are barred every night.",
+                "quote": "old-fashioned shutters with broad iron bars, which were secured every night"
+            },
+            {
+                "id": "matches",
+                "name": "Box of matches",
+                "x": 42.0,
+                "y": 60.5,
+                "observation": "A match-box beside the lamp. Julia Stoner was found holding the charred stump of a match in one hand and a match-box in the other: she had struck a light to see something in the room.",
+                "note": "Julia struck a match the night she died: something was in the room with her.",
+                "quote": "In her right hand was found the charred stump of a match, and in her left a match-box"
+            },
+            {
+                "id": "floor",
+                "name": "Walls and floorboards",
+                "x": 45.0,
+                "y": 91.0,
+                "observation": "The coroner had the walls sounded and the flooring examined. Everything was solid: there is no hidden passage into this room.",
+                "note": "No secret passage: walls and floor are solid.",
+                "quote": "The walls were carefully sounded, and were shown to be quite solid all round"
+            }
+        ],
         "clues": [
             "The bell-rope beside the bed is a dummy. It is not attached to any wire and rings nothing at all.",
             "The bed is clamped to the floor, so it can never be moved away from the rope.",
@@ -39,19 +98,69 @@
         "id": "case_2",
         "title": "The Stolen Jewel",
         "story": "The Blue Carbuncle",
-        "image": "data/images/case_2.png",
+        "image": "static/scenes/case_2_blue_carbuncle.jpg",
+        "image_alt": "A study in Baker Street on a snowy night: a battered felt hat and a white feather on the table, papers, a wicker hamper by the fire and an empty leather armchair.",
         "intro": "London, the 27th of December. The Countess of Morcar has lost the blue carbuncle from her jewel-case at the Hotel Cosmopolitan. A plumber named John Horner has been arrested and swears he is innocent. Meanwhile, a commissionaire named Peterson has brought Holmes a battered hat and a Christmas goose, picked up in a scuffle on Tottenham Court Road.",
+        "teaser": "A countess's gem vanishes, a plumber is arrested, and a battered hat turns up with a Christmas goose.",
         "objective": "Discover where the stolen gem was hidden.",
+        "watson_greeting": "Baker Street, the second morning after Christmas. Peterson left a battered hat and a goose here, and the papers are full of the Countess of Morcar's jewel. Holmes's chair is empty. Shall we look at what he left on the table?",
+        "hotspots": [
+            {
+                "id": "hat",
+                "name": "The battered hat",
+                "x": 46.0,
+                "y": 55.0,
+                "observation": "A hard felt hat, cracked, very dusty and spotted. The red silk lining is discoloured, and the initials 'H. B.' are scrawled on one side. A card on the goose read 'For Mrs. Henry Baker'.",
+                "note": "The hat and the goose belong to a Henry Baker ('H. B.').",
+                "quote": "the initials \"H. B.\" were scrawled upon one side"
+            },
+            {
+                "id": "newspaper",
+                "name": "Newspaper cutting",
+                "x": 72.5,
+                "y": 58.0,
+                "observation": "'Hotel Cosmopolitan Jewel Robbery.' John Horner, plumber, is charged. James Ryder, upper-attendant at the hotel, gave evidence that he had shown Horner up to the Countess's dressing-room on the day of the robbery.",
+                "note": "James Ryder, upper-attendant, is the man who took Horner to the dressing-room.",
+                "quote": "James Ryder, upper-attendant at the hotel, gave his evidence"
+            },
+            {
+                "id": "hamper",
+                "name": "Poultry hamper",
+                "x": 11.0,
+                "y": 74.0,
+                "observation": "A hamper lined with straw. The goose came through a chain of hands: the Alpha Inn's goose club, the salesman Breckinridge of Covent Garden, and before him a supplier, 'Mrs. Oakshott, 117, Brixton Road, egg and poultry supplier.'",
+                "note": "The goose's trail: Alpha Inn, then Breckinridge of Covent Garden, then Mrs. Oakshott of Brixton Road.",
+                "quote": "Mrs. Oakshott, 117, Brixton Road, egg and poultry supplier"
+            },
+            {
+                "id": "feather",
+                "name": "A white feather",
+                "x": 71.5,
+                "y": 72.5,
+                "observation": "A single white feather. In the Brixton Road yard, one bird was picked out of the flock with care: a fine big one, white, with a barred tail. And there were two barred-tailed birds that could not be told apart.",
+                "note": "Someone chose a white goose with a barred tail, and there were two identical ones.",
+                "quote": "a fine big one, white, with a barred tail"
+            },
+            {
+                "id": "armchair",
+                "name": "Holmes's armchair",
+                "x": 41.0,
+                "y": 42.0,
+                "observation": "Still warm from the fire, but empty. Wherever Holmes has gone, he left this case open on the table for someone to finish.",
+                "note": null,
+                "quote": null
+            }
+        ],
         "clues": [
             "Peterson's wife found the blue stone when she opened the bird in her kitchen.",
             "The bird Ryder chose was white, with a barred tail, from a flock in a back yard on Brixton Road.",
             "James Ryder, head attendant at the Hotel Cosmopolitan, had shown Horner up to the dressing-room that day."
         ],
         "suggested_questions": [
-            "Who found the blue carbuncle?",
             "What did Peterson bring to Holmes?",
             "Who was James Ryder?",
-            "Which goose had a barred tail?"
+            "Who was Henry Baker?",
+            "Where did the Alpha Inn get its geese?"
         ],
         "riddle": "A plumber stands charged, and the stone is gone.\nYet that night the jewel slept inside something living:\nwhite, with a barred tail, and bound for a Christmas table.\n\nWhere did the gem lie hidden?",
         "answer": "goose",
@@ -75,9 +184,68 @@
         "id": "case_3",
         "title": "The Secret Vault",
         "story": "The Red-Headed League",
-        "image": "data/images/case_3.png",
+        "image": "static/scenes/case_3_red_headed_league.jpg",
+        "image_alt": "A bank cellar under brick arches: a great round vault door, iron gates, stacked crates, a lantern on a crate beside loose papers, and a stone-flagged floor.",
         "intro": "Saxe-Coburg Square. Jabez Wilson, a pawnbroker with flaming red hair, was paid four pounds a week to sit in an office and copy the Encyclopaedia Britannica by hand. This morning he found the door locked and a card announcing that the Red-Headed League is dissolved. His assistant, who offered to work for half wages, is nowhere to be found.",
+        "teaser": "A league that pays red-headed men to copy an encyclopaedia, and an assistant who works for half wages.",
         "objective": "Discover what the assistant was really doing in the cellar.",
+        "watson_greeting": "We are underground, in the cellar of a City bank next to Jabez Wilson's pawnshop. Mind the lantern. Look at the crates and the floor, and ask me about the League.",
+        "hotspots": [
+            {
+                "id": "papers",
+                "name": "Holmes's case notes",
+                "x": 15.0,
+                "y": 48.5,
+                "observation": "Holmes's notes on Jabez Wilson's story. For eight weeks the League paid him to copy the Encyclopaedia Britannica by hand: 'Abbots and Archery and Armour and Architecture and Attica'. From ten to two, every day, away from his shop.",
+                "note": "The League kept Jabez Wilson away from his shop for four hours every day.",
+                "quote": "I had written about Abbots and Archery and Armour and Architecture and Attica"
+            },
+            {
+                "id": "vault",
+                "name": "The vault door",
+                "x": 67.5,
+                "y": 41.5,
+                "observation": "This is the cellar of the City branch of one of the principal London banks. Above, through the streets, is Saxe-Coburg Square and Wilson's shop.",
+                "note": "This cellar belongs to a City bank branch.",
+                "quote": "in the cellar of the City branch of one of the principal London banks"
+            },
+            {
+                "id": "crates",
+                "name": "The crates",
+                "x": 42.8,
+                "y": 61.0,
+                "observation": "The bank borrowed 30,000 napoleons in French gold and never unpacked them. This crate alone holds 2,000 napoleons packed between layers of lead foil.",
+                "note": "There is a fortune in French gold lying in this cellar.",
+                "quote": "contains 2,000 napoleons packed between layers of lead foil"
+            },
+            {
+                "id": "flagstones",
+                "name": "The flagstones",
+                "x": 60.0,
+                "y": 86.0,
+                "observation": "Mr. Merryweather strikes his stick on the flags that line the floor, and looks up in surprise: 'Why, dear me, it sounds quite hollow!'",
+                "note": "The cellar floor sounds hollow.",
+                "quote": "it sounds quite hollow"
+            },
+            {
+                "id": "lantern",
+                "name": "The lantern",
+                "x": 24.0,
+                "y": 43.5,
+                "observation": "With this lantern and a magnifying lens, Holmes knelt on the floor and examined the cracks between the stones. A few seconds were enough for him.",
+                "note": "Holmes studied the cracks between the floor stones, not the vault door.",
+                "quote": "with the lantern and a magnifying lens, began to examine minutely the cracks between the stones"
+            },
+            {
+                "id": "gate",
+                "name": "The iron gate",
+                "x": 38.5,
+                "y": 30.0,
+                "observation": "The way down to the cellar passes a massive iron gate and a flight of winding stone steps that ends at another formidable gate. Nobody gets in this way unseen.",
+                "note": null,
+                "quote": "a flight of winding stone steps, which terminated at another formidable gate"
+            }
+        ],
         "clues": [
             "The assistant was willing to work for half wages, and spent hours every day down in the cellar.",
             "The knees of his trousers were worn, wrinkled and stained.",

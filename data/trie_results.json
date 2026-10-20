@@ -1,0 +1,124 @@
+{
+  "construction": {
+    "words": 3784,
+    "total_characters": 24510,
+    "nodes": 11388,
+    "build_time_ms": 15.201451002212707
+  },
+  "queries": [
+    {
+      "prefix": "bel",
+      "matches": 6,
+      "trie_time_ms": 0.018937554996227846,
+      "linear_time_ms": 0.7176476099994034,
+      "suggestions": [
+        "believe",
+        "bell",
+        "belief",
+        "belongs",
+        "below"
+      ]
+    },
+    {
+      "prefix": "ven",
+      "matches": 3,
+      "trie_time_ms": 0.01375705498503521,
+      "linear_time_ms": 0.7176912700015237,
+      "suggestions": [
+        "ventilator",
+        "ventilate",
+        "ventilators"
+      ]
+    },
+    {
+      "prefix": "goo",
+      "matches": 4,
+      "trie_time_ms": 0.012962955006514676,
+      "linear_time_ms": 0.7190270000137389,
+      "suggestions": [
+        "good",
+        "goose",
+        "goodness",
+        "goodge"
+      ]
+    },
+    {
+      "prefix": "tun",
+      "matches": 2,
+      "trie_time_ms": 0.008285664989671204,
+      "linear_time_ms": 0.7422032500107889,
+      "suggestions": [
+        "tunnel",
+        "tunes"
+      ]
+    },
+    {
+      "prefix": "car",
+      "matches": 19,
+      "trie_time_ms": 0.05898789499042323,
+      "linear_time_ms": 0.7314699799826485,
+      "suggestions": [
+        "care",
+        "carried",
+        "carbuncle",
+        "carry",
+        "card"
+      ]
+    },
+    {
+      "prefix": "sher",
+      "matches": 1,
+      "trie_time_ms": 0.006768355015083216,
+      "linear_time_ms": 0.7135542049945798,
+      "suggestions": [
+        "sherlock"
+      ]
+    },
+    {
+      "prefix": "ro",
+      "matches": 27,
+      "trie_time_ms": 0.07761675500660203,
+      "linear_time_ms": 0.7364517899986822,
+      "suggestions": [
+        "room",
+        "round",
+        "roylott",
+        "road",
+        "rooms"
+      ]
+    },
+    {
+      "prefix": "sp",
+      "matches": 30,
+      "trie_time_ms": 0.11205252998479409,
+      "linear_time_ms": 0.7483765500001027,
+      "suggestions": [
+        "spoke",
+        "spaulding",
+        "sprang",
+        "speak",
+        "speckled"
+      ]
+    },
+    {
+      "prefix": "wh",
+      "matches": 28,
+      "trie_time_ms": 0.08397967998462263,
+      "linear_time_ms": 0.7524902400109568,
+      "suggestions": [
+        "which",
+        "what",
+        "when",
+        "who",
+        "where"
+      ]
+    },
+    {
+      "prefix": "zzz",
+      "matches": 0,
+      "trie_time_ms": 0.0015983250341378152,
+      "linear_time_ms": 0.7110790349906893,
+      "suggestions": []
+    }
+  ]
+}

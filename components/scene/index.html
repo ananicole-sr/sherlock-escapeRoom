@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crime scene</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --night: #0c1017;
+    --night-2: #121925;
+    --night-3: #1a2331;
+    --brass: #c8a25a;
+    --brass-hi: #e3c47f;
+    --brass-lo: #8c6c35;
+    --paper: #f1e6cc;
+    --paper-2: #e4d5b3;
+    --ink: #2a1f15;
+    --ink-soft: #5b4733;
+    --text: #ede6d8;
+    --text-2: #c2b9a7;
+    --line: rgba(200, 162, 90, 0.28);
+    --ok: #9cc69a;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--text);
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  /* ---------- stage ---------- */
+
+  .stage {
+    position: relative;
+    margin: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--night-2);
+    box-shadow: 0 0 0 1px var(--line), 0 18px 40px rgba(0, 0, 0, 0.55);
+    aspect-ratio: 1672 / 941;
+  }
+
+  .stage img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* The renders are very dark: lift them so the objects can be read. */
+    filter: brightness(1.18) contrast(1.04) saturate(1.04);
+    opacity: 0;
+    transition: opacity 0.6s ease-out, filter 0.3s ease-out;
+  }
+
+  .stage img.loaded { opacity: 1; }
+
+  .stage.has-card img { filter: brightness(1.0) contrast(1.04) saturate(0.95); }
+
+  .vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at center, transparent 55%, rgba(5, 7, 11, 0.55) 100%),
+      linear-gradient(to bottom, rgba(5, 7, 11, 0.35), transparent 18%, transparent 82%, rgba(5, 7, 11, 0.45));
+  }
+
+  .room-label {
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(12, 16, 23, 0.72);
+    border: 1px solid var(--line);
+    color: var(--text-2);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    backdrop-filter: blur(4px);
+    pointer-events: none;
+  }
+
+  .room-label b { color: var(--brass-hi); font-weight: 600; }
+
+  /* ---------- hotspots ---------- */
+
+  .hotspot {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    margin: -22px 0 0 -22px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    cursor: zoom-in;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .hotspot .ring {
+    position: absolute;
+    inset: 9px;
+    border-radius: 50%;
+    border: 2px solid rgba(227, 196, 127, 0.95);
+    background: rgba(12, 16, 23, 0.35);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.55), 0 0 14px rgba(227, 196, 127, 0.45);
+    transition: transform 0.18s ease-out, background 0.18s ease-out, border-color 0.18s;
+  }
+
+  .hotspot .ring::after {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border-radius: 50%;
+    background: var(--brass-hi);
+  }
+
+  .hotspot .pulse {
+    position: absolute;
+    inset: 9px;
+    border-radius: 50%;
+    border: 2px solid rgba(227, 196, 127, 0.7);
+    animation: pulse 2.4s ease-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes pulse {
+    0%   { transform: scale(1);   opacity: 0.9; }
+    70%  { transform: scale(2.0); opacity: 0; }
+    100% { transform: scale(2.0); opacity: 0; }
+  }
+
+  .hotspot .tip {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 4px);
+    transform: translate(-50%, 4px);
+    white-space: nowrap;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: rgba(12, 16, 23, 0.92);
+    border: 1px solid var(--line);
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+  }
+
+  .hotspot.tip-below .tip { bottom: auto; top: calc(100% + 4px); transform: translate(-50%, -4px); }
+
+  .hotspot:hover .tip,
+  .hotspot:focus-visible .tip { opacity: 1; transform: translate(-50%, 0); }
+
+  .hotspot:hover .ring,
+  .hotspot:focus-visible .ring { transform: scale(1.18); background: rgba(200, 162, 90, 0.35); }
+
+  .hotspot:focus-visible { outline: none; }
+  .hotspot:focus-visible .ring { box-shadow: 0 0 0 3px var(--night), 0 0 0 5px var(--brass-hi); }
+
+  /* inspected: the pulse stops and the centre empties */
+  .hotspot.inspected .pulse { display: none; }
+  .hotspot.inspected .ring { border-color: rgba(227, 196, 127, 0.7); }
+  .hotspot.inspected .ring::after { background: transparent; }
+
+  /* recorded in the notebook: filled with a tick */
+  .hotspot.recorded .ring { background: var(--brass); border-color: var(--brass-hi); }
+  .hotspot.recorded .ring::after {
+    inset: 0;
+    background: none;
+    content: "✓";
+    color: #1b130a;
+    font: 700 13px/22px "Inter", sans-serif;
+    text-align: center;
+  }
+
+  .hotspot.active .ring { transform: scale(1.22); background: rgba(200, 162, 90, 0.55); }
+
+  /* ---------- inspection card ---------- */
+
+  .card {
+    position: absolute;
+    top: 16px;
+    width: min(360px, 44%);
+    max-height: calc(100% - 32px);
+    overflow: auto;
+    padding: 18px 20px 16px;
+    border-radius: 6px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent 30%),
+      linear-gradient(180deg, var(--paper), var(--paper-2));
+    color: var(--ink);
+    box-shadow: 0 0 0 1px rgba(90, 68, 40, 0.5), 0 22px 44px rgba(0, 0, 0, 0.6);
+    animation: card-in 0.2s ease-out;
+  }
+
+  .card.right { right: 16px; }
+  .card.left { left: 16px; }
+
+  @keyframes card-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card .kicker {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-right: 32px;
+  }
+
+  .card h3 {
+    margin: 4px 0 8px;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 26px;
+    line-height: 1.1;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .card p { margin: 0 0 12px; font-size: 14.5px; line-height: 1.55; color: #33271b; }
+
+  .card blockquote {
+    margin: 0 0 12px;
+    padding: 8px 12px;
+    border-left: 3px solid var(--brass-lo);
+    background: rgba(140, 108, 53, 0.1);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.35;
+    color: #3b2c1d;
+  }
+
+  .card blockquote cite {
+    display: block;
+    margin-top: 4px;
+    font-family: "Inter", sans-serif;
+    font-size: 11.5px;
+    font-style: normal;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+  }
+
+  .card .tag {
+    display: inline-block;
+    margin: 0 0 12px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(91, 71, 51, 0.12);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  .card .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+
+  .btn {
+    min-height: 40px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #6e5330;
+    background: #2a1f15;
+    color: var(--paper);
+    font: 600 14px "Inter", sans-serif;
+    cursor: pointer;
+    transition: background 0.15s ease-out, transform 0.1s ease-out;
+  }
+
+  .btn:hover { background: #3d2c1c; }
+  .btn:active { transform: scale(0.98); }
+  .btn:focus-visible { outline: 2px solid #6e5330; outline-offset: 2px; }
+
+  .recorded-note { font-size: 13.5px; font-weight: 600; color: #3d6b3a; }
+  .muted { font-size: 13px; color: var(--ink-soft); }
+
+  .close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink-soft);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .close:hover { background: rgba(91, 71, 51, 0.14); color: var(--ink); }
+  .close:focus-visible { outline: 2px solid #6e5330; outline-offset: 1px; }
+
+  .deduce-hint {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(91, 71, 51, 0.4);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- accessible list of objects ---------- */
+
+  .objects {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 2px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .objects .label {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    margin-right: 4px;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 36px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(18, 25, 37, 0.8);
+    color: var(--text);
+    font: 500 13px "Inter", sans-serif;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .chip:hover { border-color: var(--brass); background: rgba(200, 162, 90, 0.1); }
+  .chip:focus-visible { outline: 2px solid var(--brass-hi); outline-offset: 2px; }
+  .chip[aria-pressed="true"] { border-color: var(--brass-hi); background: rgba(200, 162, 90, 0.18); }
+
+  .chip .state {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid var(--brass-hi);
+    flex: none;
+  }
+
+  .chip.new .state { background: var(--brass-hi); }
+  .chip.recorded .state { background: var(--ok); border-color: var(--ok); }
+
+  .progress-note { margin-left: auto; font-size: 12.5px; color: var(--text-2); }
+
+  /* ---------- small screens: the card leaves the image ---------- */
+
+  @media (max-width: 640px) {
+    .card, .card.left, .card.right {
+      position: relative;
+      top: auto; left: auto; right: auto;
+      width: 100%;
+      max-height: none;
+      margin-top: 12px;
+    }
+    .stage-wrap .card { display: block; }
+    .hotspot .tip { display: none; }
+    .progress-note { margin-left: 0; width: 100%; }
+    .room-label { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hotspot .pulse { animation: none; display: none; }
+    .card { animation: none; }
+    .stage img { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div id="live" class="sr-only" aria-live="polite"></div>
+
+<script>
+  // Minimal implementation of the Streamlit component protocol (no build step).
+  function send(type, data) {
+    window.parent.postMessage(Object.assign({ isStreamlitMessage: true, type: type }, data || {}), "*");
+  }
+
+  let lastHeight = -1;
+
+  function updateHeight() {
+    const height = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    if (height !== lastHeight) {
+      lastHeight = height;
+      send("streamlit:setFrameHeight", { height: height });
+    }
+  }
+
+  function emit(type, id) {
+    send("streamlit:setComponentValue", {
+      value: { type: type, id: id, ts: Date.now() + Math.random() },
+      dataType: "json"
+    });
+  }
+
+  const appUrl = new URLSearchParams(location.search).get("streamlitUrl") || (location.origin + "/");
+
+  let args = null;
+  let builtFor = null;
+  let openId = null;
+  let returnFocusTo = null;
+
+  const root = document.getElementById("root");
+  const live = document.getElementById("live");
+
+  function escapeHtml(text) {
+    const div = document.createElement("div");
+    div.textContent = text == null ? "" : String(text);
+    return div.innerHTML;
+  }
+
+  function hotspotById(id) {
+    return args.hotspots.find(function (h) { return h.id === id; });
+  }
+
+  function stateLabel(h) {
+    if (h.recorded) return "recorded in notebook";
+    if (h.inspected) return "inspected";
+    return "not inspected yet";
+  }
+
+  function build() {
+    builtFor = args.case_id;
+    openId = null;
+
+    const imageUrl = new URL(args.image, appUrl).href;
+
+    root.innerHTML =
+      '<div class="stage-wrap">' +
+        '<figure class="stage" id="stage">' +
+          '<img id="scene" alt="' + escapeHtml(args.alt) + '">' +
+          '<div class="vignette"></div>' +
+          '<div class="room-label"><b>' + escapeHtml(args.label) + '</b> &middot; click the glowing marks</div>' +
+          '<div id="spots"></div>' +
+          '<div id="card-slot"></div>' +
+        '</figure>' +
+        '<div id="card-docked"></div>' +
+      '</div>' +
+      '<div class="objects" role="group" aria-label="Objects you can inspect in this scene">' +
+        '<span class="label" aria-hidden="true">Objects</span>' +
+        '<span id="chips" style="display:contents"></span>' +
+        '<span class="progress-note" id="progress"></span>' +
+      '</div>';
+
+    const img = document.getElementById("scene");
+    img.addEventListener("load", function () { img.classList.add("loaded"); updateHeight(); });
+    img.src = imageUrl;
+
+    const spots = document.getElementById("spots");
+    const chips = document.getElementById("chips");
+
+    args.hotspots.forEach(function (h) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "hotspot" + (h.y < 16 ? " tip-below" : "");
+      button.style.left = h.x + "%";
+      button.style.top = h.y + "%";
+      button.dataset.id = h.id;
+      button.innerHTML = '<span class="pulse"></span><span class="ring"></span>' +
+                         '<span class="tip">' + escapeHtml(h.name) + '</span>';
+      button.addEventListener("click", function () { open(h.id, button); });
+      spots.appendChild(button);
+
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "chip";
+      chip.dataset.id = h.id;
+      chip.innerHTML = '<span class="state" aria-hidden="true"></span><span>' + escapeHtml(h.name) + '</span>';
+      chip.addEventListener("click", function () { open(h.id, chip); });
+      chips.appendChild(chip);
+    });
+
+    document.addEventListener("keydown", onKey);
+  }
+
+  function onKey(event) {
+    if (event.key === "Escape" && openId) {
+      close();
+    }
+  }
+
+  function open(id, origin) {
+    const h = hotspotById(id);
+    openId = id;
+    returnFocusTo = origin || null;
+
+    if (!h.inspected) {
+      emit("inspect", id);
+    }
+
+    refresh();
+
+    const closeButton = document.querySelector(".card .close");
+    if (closeButton) closeButton.focus({ preventScroll: true });
+
+    live.textContent = h.name + " opened.";
+  }
+
+  function close() {
+    openId = null;
+    refresh();
+    if (returnFocusTo) returnFocusTo.focus({ preventScroll: true });
+    live.textContent = "Inspection closed.";
+  }
+
+  function record(id) {
+    emit("record", id);
+    // Optimistic update; the next render from Python confirms it.
+    hotspotById(id).recorded = true;
+    hotspotById(id).inspected = true;
+    refresh();
+    const note = document.querySelector(".card .recorded-note");
+    if (note) note.focus({ preventScroll: true });
+    live.textContent = "Recorded in your notebook.";
+  }
+
+  function cardHtml(h) {
+    let html = '<button type="button" class="close" aria-label="Close inspection">&times;</button>';
+
+    html += '<div class="kicker"><span>Observation</span><span>' + escapeHtml(stateLabel(h)) + '</span></div>';
+    html += '<h3 id="card-title">' + escapeHtml(h.name) + '</h3>';
+    html += '<p>' + escapeHtml(h.observation) + '</p>';
+
+    if (h.quote) {
+      html += '<blockquote>&ldquo;' + escapeHtml(h.quote) + '&rdquo;' +
+              '<cite>&mdash; ' + escapeHtml(args.story) + ' (verified in the text)</cite></blockquote>';
+    } else {
+      html += '<span class="tag">Game narrative &middot; not from the original story</span>';
+    }
+
+    html += '<div class="actions">';
+
+    if (h.note) {
+      if (h.recorded) {
+        html += '<span class="recorded-note" tabindex="-1">&#10003; In your notebook</span>';
+      } else {
+        html += '<button type="button" class="btn" data-record="' + escapeHtml(h.id) + '">Record in notebook</button>';
+      }
+    } else {
+      html += '<span class="muted">Nothing here worth recording.</span>';
+    }
+
+    html += '</div>';
+    html += '<div class="deduce-hint">An observation is not a conclusion. Connect the evidence, then present your deduction.</div>';
+
+    return html;
+  }
+
+  function refresh() {
+    const stage = document.getElementById("stage");
+    const slot = document.getElementById("card-slot");
+    const docked = document.getElementById("card-docked");
+    const narrow = window.matchMedia("(max-width: 640px)").matches;
+
+    slot.innerHTML = "";
+    docked.innerHTML = "";
+
+    let done = 0;
+
+    args.hotspots.forEach(function (h) {
+      const spot = document.querySelector('.hotspot[data-id="' + h.id + '"]');
+      spot.classList.toggle("inspected", !!h.inspected);
+      spot.classList.toggle("recorded", !!h.recorded);
+      spot.classList.toggle("active", h.id === openId);
+      spot.setAttribute("aria-label", "Inspect " + h.name + " (" + stateLabel(h) + ")");
+      spot.setAttribute("aria-expanded", h.id === openId ? "true" : "false");
+
+      const chip = document.querySelector('.chip[data-id="' + h.id + '"]');
+      chip.classList.toggle("new", !h.inspected);
+      chip.classList.toggle("recorded", !!h.recorded);
+      chip.setAttribute("aria-pressed", h.id === openId ? "true" : "false");
+      chip.setAttribute("aria-label", "Inspect " + h.name + " (" + stateLabel(h) + ")");
+
+      if (h.inspected) done += 1;
+    });
+
+    document.getElementById("progress").textContent =
+      done + " of " + args.hotspots.length + " inspected";
+
+    stage.classList.toggle("has-card", !!openId);
+
+    if (openId) {
+      const h = hotspotById(openId);
+      const card = document.createElement("section");
+      card.className = "card " + (h.x > 52 ? "left" : "right");
+      card.setAttribute("role", "dialog");
+      card.setAttribute("aria-labelledby", "card-title");
+      card.innerHTML = cardHtml(h);
+
+      (narrow ? docked : slot).appendChild(card);
+
+      card.querySelector(".close").addEventListener("click", close);
+
+      const recordButton = card.querySelector("[data-record]");
+      if (recordButton) {
+        recordButton.addEventListener("click", function () { record(h.id); });
+      }
+    }
+
+    updateHeight();
+  }
+
+  window.addEventListener("message", function (event) {
+    const data = event.data;
+
+    if (!data || data.type !== "streamlit:render") return;
+
+    const previousOpen = openId;
+    args = data.args;
+
+    if (builtFor !== args.case_id) {
+      build();
+    } else {
+      openId = previousOpen;
+    }
+
+    refresh();
+  });
+
+  window.addEventListener("resize", function () { if (args) refresh(); });
+
+  send("streamlit:componentReady", { apiVersion: 1 });
+</script>
+</body>
+</html>

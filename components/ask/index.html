@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ask Watson</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --night-2: #121925;
+    --night-3: #1a2331;
+    --brass: #c8a25a;
+    --brass-hi: #e3c47f;
+    --text: #ede6d8;
+    --text-2: #c2b9a7;
+    --text-3: #a39a89;
+    --line: rgba(200, 162, 90, 0.28);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--text);
+    font: 15px/1.45 "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  /* room for the focus ring, which would be clipped by the iframe */
+  .wrap { padding: 4px 4px 2px; }
+
+  form { display: flex; gap: 8px; align-items: stretch; }
+
+  input {
+    flex: 1;
+    min-width: 0;
+    min-height: 46px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--night-3);
+    color: var(--text);
+    font: 15px "Inter", sans-serif;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  input::placeholder { color: var(--text-3); }
+  input:focus { outline: none; border-color: var(--brass); box-shadow: 0 0 0 3px rgba(200, 162, 90, 0.28); }
+  input:disabled { opacity: 0.6; }
+
+  .send {
+    min-width: 76px;
+    min-height: 46px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 10px;
+    background: linear-gradient(180deg, var(--brass-hi), var(--brass));
+    color: #1b130a;
+    font: 600 15px "Inter", sans-serif;
+    cursor: pointer;
+    transition: filter 0.15s, transform 0.1s;
+  }
+
+  .send:hover { filter: brightness(1.06); }
+  .send:active { transform: scale(0.98); }
+  .send:focus-visible { outline: 2px solid var(--brass-hi); outline-offset: 2px; }
+  .send:disabled { cursor: progress; filter: saturate(0.4) brightness(0.8); }
+
+  .spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(27, 19, 10, 0.35);
+    border-top-color: #1b130a;
+    border-radius: 50%;
+    vertical-align: -2px;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    min-height: 0;
+  }
+
+  .row:empty { display: none; }
+
+  .row .label {
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-right: 2px;
+  }
+
+  .option, .starter {
+    min-height: 34px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(18, 25, 37, 0.85);
+    color: var(--text);
+    font: 500 13px "Inter", sans-serif;
+    cursor: pointer;
+    transition: border-color 0.12s, background 0.12s;
+  }
+
+  .option:hover, .starter:hover { border-color: var(--brass); }
+  .option[aria-selected="true"] { border-color: var(--brass-hi); background: rgba(200, 162, 90, 0.22); }
+  .option:focus-visible, .starter:focus-visible { outline: 2px solid var(--brass-hi); outline-offset: 2px; }
+  .option b { color: var(--brass-hi); font-weight: 600; }
+
+  .starter { text-align: left; border-radius: 10px; }
+
+  .hint { margin: 6px 2px 0; font-size: 12px; color: var(--text-3); }
+
+  @media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 2.4s; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <form id="form" autocomplete="off">
+    <label class="sr-only" for="question">Ask Dr. Watson a question about the case</label>
+    <input id="question" type="text" role="combobox" aria-autocomplete="list"
+           aria-expanded="false" aria-controls="suggestions" spellcheck="true">
+    <button class="send" id="send" type="submit">Ask</button>
+  </form>
+  <div class="row" id="suggestions" role="listbox" aria-label="Word suggestions from the case vocabulary"></div>
+  <div class="row" id="starters" aria-label="Questions to get started"></div>
+  <p class="hint" id="hint"></p>
+</div>
+<div id="live" class="sr-only" aria-live="polite"></div>
+
+<script>
+  function send(type, data) {
+    window.parent.postMessage(Object.assign({ isStreamlitMessage: true, type: type }, data || {}), "*");
+  }
+
+  let lastHeight = -1;
+
+  function updateHeight() {
+    const height = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    if (height !== lastHeight) {
+      lastHeight = height;
+      send("streamlit:setFrameHeight", { height: height });
+    }
+  }
+
+  function emit(type, text) {
+    send("streamlit:setComponentValue", {
+      value: { type: type, text: text, ts: Date.now() + Math.random() },
+      dataType: "json"
+    });
+  }
+
+  const input = document.getElementById("question");
+  const button = document.getElementById("send");
+  const form = document.getElementById("form");
+  const suggestionsBox = document.getElementById("suggestions");
+  const startersBox = document.getElementById("starters");
+  const hint = document.getElementById("hint");
+  const live = document.getElementById("live");
+
+  let args = null;
+  let clearToken = null;
+  let scrollToken = null;
+  let busy = false;
+  let highlighted = -1;
+  let typingTimer = null;
+  let lastSentPrefix = null;
+
+  function lastWord(text) {
+    if (text.length === 0 || /\s$/.test(text)) return "";
+    const parts = text.trim().split(/\s+/);
+    return parts[parts.length - 1].toLowerCase().replace(/[^a-z0-9]/g, "");
+  }
+
+  function currentSuggestions() {
+    if (!args) return [];
+    const prefix = lastWord(input.value);
+    if (prefix.length < 2 || prefix !== args.prefix) return [];
+    return args.suggestions || [];
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  function renderSuggestions() {
+    const words = currentSuggestions();
+    const prefix = lastWord(input.value);
+
+    suggestionsBox.innerHTML = "";
+
+    if (highlighted >= words.length) highlighted = -1;
+
+    if (words.length > 0) {
+      const label = document.createElement("span");
+      label.className = "label";
+      label.textContent = "Trie";
+      label.setAttribute("aria-hidden", "true");
+      suggestionsBox.appendChild(label);
+    }
+
+    words.forEach(function (word, index) {
+      const option = document.createElement("button");
+      option.type = "button";
+      option.className = "option";
+      option.id = "option-" + index;
+      option.setAttribute("role", "option");
+      option.setAttribute("aria-selected", index === highlighted ? "true" : "false");
+      option.tabIndex = -1;
+      option.innerHTML = "<b>" + escapeHtml(word.slice(0, prefix.length)) + "</b>" +
+                         escapeHtml(word.slice(prefix.length));
+      option.addEventListener("mousedown", function (e) { e.preventDefault(); });
+      option.addEventListener("click", function () { accept(word); });
+      suggestionsBox.appendChild(option);
+    });
+
+    input.setAttribute("aria-expanded", words.length > 0 ? "true" : "false");
+
+    if (highlighted >= 0) {
+      input.setAttribute("aria-activedescendant", "option-" + highlighted);
+    } else {
+      input.removeAttribute("aria-activedescendant");
+    }
+
+    hint.textContent = words.length > 0
+      ? "↑ ↓ to choose a word, Tab to complete it, Enter to ask."
+      : "Watson searches the original stories and answers from what he finds.";
+
+    updateHeight();
+  }
+
+  function renderStarters() {
+    startersBox.innerHTML = "";
+
+    if (!args.starters || args.starters.length === 0 || input.value.trim().length > 0) {
+      updateHeight();
+      return;
+    }
+
+    const label = document.createElement("span");
+    label.className = "label";
+    label.textContent = "Try";
+    startersBox.appendChild(label);
+
+    args.starters.forEach(function (question) {
+      const starter = document.createElement("button");
+      starter.type = "button";
+      starter.className = "starter";
+      starter.textContent = question;
+      starter.addEventListener("click", function () {
+        input.value = question;
+        renderStarters();
+        renderSuggestions();
+        input.focus();
+      });
+      startersBox.appendChild(starter);
+    });
+
+    updateHeight();
+  }
+
+  function accept(word) {
+    const text = input.value;
+    const trimmed = text.replace(/\S+$/, "");
+    input.value = trimmed + word + " ";
+    highlighted = -1;
+    input.focus();
+    renderSuggestions();
+    live.textContent = word + " added.";
+  }
+
+  function setBusy(value) {
+    busy = value;
+    input.disabled = value;
+    button.disabled = value;
+    button.innerHTML = value ? '<span class="spinner" aria-hidden="true"></span><span class="sr-only">Watson is working</span>' : "Ask";
+    button.setAttribute("aria-busy", value ? "true" : "false");
+  }
+
+  function scheduleTyping() {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(function () {
+      const prefix = lastWord(input.value);
+      if (prefix.length >= 2 && prefix !== lastSentPrefix) {
+        lastSentPrefix = prefix;
+        emit("typing", input.value);
+      }
+    }, 140);
+  }
+
+  input.addEventListener("input", function () {
+    highlighted = -1;
+    renderSuggestions();
+    renderStarters();
+    scheduleTyping();
+  });
+
+  input.addEventListener("keydown", function (event) {
+    const words = currentSuggestions();
+
+    if (event.key === "ArrowDown" && words.length > 0) {
+      event.preventDefault();
+      highlighted = (highlighted + 1) % words.length;
+      renderSuggestions();
+    } else if (event.key === "ArrowUp" && words.length > 0) {
+      event.preventDefault();
+      highlighted = highlighted <= 0 ? words.length - 1 : highlighted - 1;
+      renderSuggestions();
+    } else if (event.key === "Tab" && words.length > 0 && !event.shiftKey) {
+      event.preventDefault();
+      accept(words[highlighted >= 0 ? highlighted : 0]);
+    } else if (event.key === "Enter" && highlighted >= 0 && words.length > 0) {
+      event.preventDefault();
+      accept(words[highlighted]);
+    } else if (event.key === "Escape") {
+      highlighted = -1;
+      lastSentPrefix = null;
+      suggestionsBox.innerHTML = "";
+      input.setAttribute("aria-expanded", "false");
+      updateHeight();
+    }
+  });
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const text = input.value.trim();
+    if (text.length === 0 || busy) {
+      input.focus();
+      return;
+    }
+    setBusy(true);
+    suggestionsBox.innerHTML = "";
+    startersBox.innerHTML = "";
+    live.textContent = "Question sent. Watson is searching the files.";
+    emit("submit", text);
+  });
+
+  function scrollChatLog(key) {
+    // The component is served from the same origin as the app, so it can
+    // keep the conversation scrolled to the newest message.
+    try {
+      const host = window.parent.document.querySelector(".st-key-" + key);
+      if (!host) return;
+      const nodes = [host].concat(Array.from(host.querySelectorAll("div")));
+      for (const node of nodes) {
+        if (node.scrollHeight > node.clientHeight + 4) {
+          const style = window.parent.getComputedStyle(node);
+          if (style.overflowY === "auto" || style.overflowY === "scroll") {
+            node.scrollTo({ top: node.scrollHeight, behavior: "smooth" });
+            return;
+          }
+        }
+      }
+    } catch (error) {
+      // Not critical: the player can still scroll by hand.
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    const data = event.data;
+    if (!data || data.type !== "streamlit:render") return;
+
+    const first = args === null;
+    args = data.args;
+
+    input.placeholder = args.placeholder || "Ask Watson…";
+
+    if (args.clear_token !== clearToken) {
+      if (clearToken !== null) {
+        input.value = "";
+        lastSentPrefix = null;
+        setBusy(false);
+        input.focus();
+      }
+      clearToken = args.clear_token;
+    }
+
+    if (args.scroll_token !== scrollToken) {
+      scrollToken = args.scroll_token;
+      setTimeout(function () { scrollChatLog(args.log_key); }, first ? 300 : 60);
+    }
+
+    renderSuggestions();
+    renderStarters();
+  });
+
+  send("streamlit:componentReady", { apiVersion: 1 });
+  updateHeight();
+</script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+{
+  "model": "google/flan-t5-base",
+  "device": "cpu",
+  "model_load_ms": 8997.0,
+  "memory_before_load_mb": 17.7,
+  "memory_after_load_mb": 529.8,
+  "memory_peak_mb": 1426.3,
+  "results": [
+    {
+      "question": "What did Holmes discover about the bell rope?",
+      "story_filter": "The Speckled Band",
+      "answerable_from_documents": true,
+      "model": "google/flan-t5-base",
+      "status": "ok",
+      "answer": "This was a dummy, and that the bed was clamped to the floor",
+      "retrieval_time_ms": 69.07,
+      "generation_time_ms": 3024.6,
+      "prompt_tokens": 476,
+      "input_budget_tokens": 512,
+      "context": [
+        {
+          "chunk_id": "speckled_band_051",
+          "story": "The Speckled Band",
+          "score": 0.463644,
+          "excerpt": "I can only claim the merit that I instantly reconsidered my position when, however, it became clear to me that whatever danger threatened an occupant of the room could not come either from the window or the door. My attention was speedily drawn, as I have already remarked to you, to this ventilator, and to the bell-rope which hung down to the bed. The discovery that this was a dummy, and that the bed was clamped to the floor, instantly gave rise to the suspicion that the rope was there as a bridge for something passing through the hole and coming to the bed.",
+          "tokens": 131
+        },
+        {
+          "chunk_id": "speckled_band_041",
+          "story": "The Speckled Band",
+          "score": 0.463312,
+          "excerpt": "I imagine that you saw all that I did.” “I saw nothing remarkable save the bell-rope, and what purpose that could answer I confess is more than I can imagine.” “You saw the ventilator, too?” “Yes, but I do not think that it is such a very unusual thing to have a small opening between two rooms. It was so small that a rat could hardly pass through.” “I knew that we should find a ventilator before ever we came to Stoke Moran.” “My dear Holmes!” “Oh, yes, I did.",
+          "tokens": 121
+        },
+        {
+          "chunk_id": "speckled_band_042",
+          "story": "The Speckled Band",
+          "score": 0.462917,
+          "excerpt": "Does not that strike you?” “I cannot as yet see any connection.” “Did you observe anything very peculiar about that bed?” “No.” “It was clamped to the floor. Did you ever see a bed fastened like that before?” “I cannot say that I have.” “The lady could not move her bed. It must always be in the same relative position to the ventilator and to the rope—or so we may call it, since it was clearly never meant for a bell-pull.” “Holmes,” I cried, “I seem to see dimly what you are hinting at.",
+          "tokens": 134
+        }
+      ],
+      "prompt": "Read the passages from the Sherlock Holmes stories and answer the question in English in one complete sentence. Use only the passages. If they do not contain the answer, reply exactly: I do not know.\n\nPassages:\n[1] (The Speckled Band) I can only claim the merit that I instantly reconsidered my position when, however, it became clear to me that whatever danger threatened an occupant of the room could not come either from the window or the door. My attention was speedily drawn, as I have already remarked to you, to this ventilator, and to the bell-rope which hung down to the bed. The discovery that this was a dummy, and that the bed was clamped to the floor, instantly gave rise to the suspicion that the rope was there as a bridge for something passing through the hole and coming to the bed.\n[2] (The Speckled Band) I imagine that you saw all that I did.” “I saw nothing remarkable save the bell-rope, and what purpose that could answer I confess is more than I can imagine.” “You saw the ventilator, too?” “Yes, but I do not think that it is such a very unusual thing to have a small opening between two rooms. It was so small that a rat could hardly pass through.” “I knew that we should find a ventilator before ever we came to Stoke Moran.” “My dear Holmes!” “Oh, yes, I did.\n[3] (The Speckled Band) Does not that strike you?” “I cannot as yet see any connection.” “Did you observe anything very peculiar about that bed?” “No.” “It was clamped to the floor. Did you ever see a bed fastened like that before?” “I cannot say that I have.” “The lady could not move her bed. It must always be in the same relative position to the ventilator and to the rope—or so we may call it, since it was clearly never meant for a bell-pull.” “Holmes,” I cried, “I seem to see dimly what you are hinting at.\n\nQuestion: What did Holmes discover about the bell rope?\nAnswer:",
+      "error": null,
+      "memory_rss_mb": 1225.9,
+      "memory_peak_mb": 1417.1
+    },
+    {
+      "question": "Where did Peterson's wife find the blue stone?",
+      "story_filter": "The Blue Carbuncle",
+      "answerable_from_documents": true,
+      "model": "google/flan-t5-base",
+      "status": "ok",
+      "answer": "Waiting-maid",
+      "retrieval_time_ms": 13.763,
+      "generation_time_ms": 1461.6,
+      "prompt_tokens": 440,
+      "input_budget_tokens": 512,
+      "context": [
+        {
+          "chunk_id": "blue_carbuncle_012",
+          "story": "The Blue Carbuncle",
+          "score": 0.520432,
+          "excerpt": "Sherlock Holmes sat up with a whistle. “By Jove, Peterson!” said he, “this is treasure trove indeed. I suppose you know what you have got?” “A diamond, sir? A precious stone. It cuts into glass as though it were putty.” “It’s more than a precious stone. It is _the_ precious stone.” “Not the Countess of Morcar’s blue carbuncle!” I ejaculated.",
+          "tokens": 110
+        },
+        {
+          "chunk_id": "blue_carbuncle_017",
+          "story": "The Blue Carbuncle",
+          "score": 0.311959,
+          "excerpt": "Thank you. And, I say, Peterson, just buy a goose on your way back and leave it here with me, for we must have one to give to this gentleman in place of the one which your family is now devouring.” When the commissionaire had gone, Holmes took up the stone and held it against the light. “It’s a bonny thing,” said he. “Just see how it glints and sparkles. Of course it is a nucleus and focus of crime. Every good stone is. They are the devil’s pet baits.",
+          "tokens": 129
+        },
+        {
+          "chunk_id": "blue_carbuncle_035",
+          "story": "The Blue Carbuncle",
+          "score": 0.311524,
+          "excerpt": "“I have almost every link in my hands, and all the proofs which I could possibly need, so there is little which you need tell me. Still, that little may as well be cleared up to make the case complete. You had heard, Ryder, of this blue stone of the Countess of Morcar’s?” “It was Catherine Cusack who told me of it,” said he in a crackling voice. “I see—her ladyship’s waiting-maid.",
+          "tokens": 108
+        }
+      ],
+      "prompt": "Read the passages from the Sherlock Holmes stories and answer the question in English in one complete sentence. Use only the passages. If they do not contain the answer, reply exactly: I do not know.\n\nPassages:\n[1] (The Blue Carbuncle) Sherlock Holmes sat up with a whistle. “By Jove, Peterson!” said he, “this is treasure trove indeed. I suppose you know what you have got?” “A diamond, sir? A precious stone. It cuts into glass as though it were putty.” “It’s more than a precious stone. It is _the_ precious stone.” “Not the Countess of Morcar’s blue carbuncle!” I ejaculated.\n[2] (The Blue Carbuncle) Thank you. And, I say, Peterson, just buy a goose on your way back and leave it here with me, for we must have one to give to this gentleman in place of the one which your family is now devouring.” When the commissionaire had gone, Holmes took up the stone and held it against the light. “It’s a bonny thing,” said he. “Just see how it glints and sparkles. Of course it is a nucleus and focus of crime. Every good stone is. They are the devil’s pet baits.\n[3] (The Blue Carbuncle) “I have almost every link in my hands, and all the proofs which I could possibly need, so there is little which you need tell me. Still, that little may as well be cleared up to make the case complete. You had heard, Ryder, of this blue stone of the Countess of Morcar’s?” “It was Catherine Cusack who told me of it,” said he in a crackling voice. “I see—her ladyship’s waiting-maid.\n\nQuestion: Where did Peterson's wife find the blue stone?\nAnswer:",
+      "error": null,
+      "memory_rss_mb": 1283.8,
+      "memory_peak_mb": 1417.1
+    },
+    {
+      "question": "Why was Jabez Wilson paid to copy the Encyclopaedia?",
+      "story_filter": "The Red-Headed League",
+      "answerable_from_documents": true,
+      "model": "google/flan-t5-base",
+      "status": "ok",
+      "answer": "Congratulated himself on the important position",
+      "retrieval_time_ms": 17.37,
+      "generation_time_ms": 1343.7,
+      "prompt_tokens": 415,
+      "input_budget_tokens": 512,
+      "context": [
+        {
+          "chunk_id": "red_headed_league_019",
+          "story": "The Red-Headed League",
+          "score": 0.372107,
+          "excerpt": "Jabez Wilson, and let me congratulate you once more on the important position which you have been fortunate enough to gain.’ He bowed me out of the room and I went home with my assistant, hardly knowing what to say or do, I was so pleased at my own good fortune. “Well, I thought over the matter all day, and by evening I was in low spirits again; for I had quite persuaded myself that the whole affair must be some great hoax or fraud, though what its object might be I could not imagine.",
+          "tokens": 119
+        },
+        {
+          "chunk_id": "red_headed_league_006",
+          "story": "The Red-Headed League",
+          "score": 0.249566,
+          "excerpt": "I have made a small study of tattoo marks and have even contributed to the literature of the subject. That trick of staining the fishes’ scales of a delicate pink is quite peculiar to China. When, in addition, I see a Chinese coin hanging from your watch-chain, the matter becomes even more simple.” Mr. Jabez Wilson laughed heavily.",
+          "tokens": 79
+        },
+        {
+          "chunk_id": "red_headed_league_049",
+          "story": "The Red-Headed League",
+          "score": 0.249495,
+          "excerpt": "When you drove home after the concert I called upon Scotland Yard and upon the chairman of the bank directors, with the result that you have seen.” “And how could you tell that they would make their attempt to-night?” I asked. “Well, when they closed their League offices that was a sign that they cared no longer about Mr. Jabez Wilson’s presence—in other words, that they had completed their tunnel. But it was essential that they should use it soon, as it might be discovered, or the bullion might be removed.",
+          "tokens": 116
+        }
+      ],
+      "prompt": "Read the passages from the Sherlock Holmes stories and answer the question in English in one complete sentence. Use only the passages. If they do not contain the answer, reply exactly: I do not know.\n\nPassages:\n[1] (The Red-Headed League) Jabez Wilson, and let me congratulate you once more on the important position which you have been fortunate enough to gain.’ He bowed me out of the room and I went home with my assistant, hardly knowing what to say or do, I was so pleased at my own good fortune. “Well, I thought over the matter all day, and by evening I was in low spirits again; for I had quite persuaded myself that the whole affair must be some great hoax or fraud, though what its object might be I could not imagine.\n[2] (The Red-Headed League) I have made a small study of tattoo marks and have even contributed to the literature of the subject. That trick of staining the fishes’ scales of a delicate pink is quite peculiar to China. When, in addition, I see a Chinese coin hanging from your watch-chain, the matter becomes even more simple.” Mr. Jabez Wilson laughed heavily.\n[3] (The Red-Headed League) When you drove home after the concert I called upon Scotland Yard and upon the chairman of the bank directors, with the result that you have seen.” “And how could you tell that they would make their attempt to-night?” I asked. “Well, when they closed their League offices that was a sign that they cared no longer about Mr. Jabez Wilson’s presence—in other words, that they had completed their tunnel. But it was essential that they should use it soon, as it might be discovered, or the bullion might be removed.\n\nQuestion: Why was Jabez Wilson paid to copy the Encyclopaedia?\nAnswer:",
+      "error": null,
+      "memory_rss_mb": 1280.2,
+      "memory_peak_mb": 1417.1
+    },
+    {
+      "question": "What colour was the Countess of Morcar's carriage?",
+      "story_filter": "The Blue Carbuncle",
+      "answerable_from_documents": false,
+      "model": "google/flan-t5-base",
+      "status": "ok",
+      "answer": "Blue",
+      "retrieval_time_ms": 1.593,
+      "generation_time_ms": 808.6,
+      "prompt_tokens": 459,
+      "input_budget_tokens": 512,
+      "context": [
+        {
+          "chunk_id": "blue_carbuncle_035",
+          "story": "The Blue Carbuncle",
+          "score": 0.373959,
+          "excerpt": "You had heard, Ryder, of this blue stone of the Countess of Morcar’s?” “It was Catherine Cusack who told me of it,” said he in a crackling voice. “I see—her ladyship’s waiting-maid. Well, the temptation of sudden wealth so easily acquired was too much for you, as it has been for better men before you; but you were not very scrupulous in the means you used. It seems to me, Ryder, that there is the making of a very pretty villain in you.",
+          "tokens": 124
+        },
+        {
+          "chunk_id": "blue_carbuncle_012",
+          "story": "The Blue Carbuncle",
+          "score": 0.372431,
+          "excerpt": "I suppose you know what you have got?” “A diamond, sir? A precious stone. It cuts into glass as though it were putty.” “It’s more than a precious stone. It is _the_ precious stone.” “Not the Countess of Morcar’s blue carbuncle!” I ejaculated. “Precisely so. I ought to know its size and shape, seeing that I have read the advertisement about it in _The Times_ every day lately.",
+          "tokens": 114
+        },
+        {
+          "chunk_id": "blue_carbuncle_014",
+          "story": "The Blue Carbuncle",
+          "score": 0.371856,
+          "excerpt": "John Horner, 26, plumber, was brought up upon the charge of having upon the 22nd inst., abstracted from the jewel-case of the Countess of Morcar the valuable gem known as the blue carbuncle. James Ryder, upper-attendant at the hotel, gave his evidence to the effect that he had shown Horner up to the dressing-room of the Countess of Morcar upon the day of the robbery in order that he might solder the second bar of the grate, which was loose.",
+          "tokens": 124
+        }
+      ],
+      "prompt": "Read the passages from the Sherlock Holmes stories and answer the question in English in one complete sentence. Use only the passages. If they do not contain the answer, reply exactly: I do not know.\n\nPassages:\n[1] (The Blue Carbuncle) You had heard, Ryder, of this blue stone of the Countess of Morcar’s?” “It was Catherine Cusack who told me of it,” said he in a crackling voice. “I see—her ladyship’s waiting-maid. Well, the temptation of sudden wealth so easily acquired was too much for you, as it has been for better men before you; but you were not very scrupulous in the means you used. It seems to me, Ryder, that there is the making of a very pretty villain in you.\n[2] (The Blue Carbuncle) I suppose you know what you have got?” “A diamond, sir? A precious stone. It cuts into glass as though it were putty.” “It’s more than a precious stone. It is _the_ precious stone.” “Not the Countess of Morcar’s blue carbuncle!” I ejaculated. “Precisely so. I ought to know its size and shape, seeing that I have read the advertisement about it in _The Times_ every day lately.\n[3] (The Blue Carbuncle) John Horner, 26, plumber, was brought up upon the charge of having upon the 22nd inst., abstracted from the jewel-case of the Countess of Morcar the valuable gem known as the blue carbuncle. James Ryder, upper-attendant at the hotel, gave his evidence to the effect that he had shown Horner up to the dressing-room of the Countess of Morcar upon the day of the robbery in order that he might solder the second bar of the grate, which was loose.\n\nQuestion: What colour was the Countess of Morcar's carriage?\nAnswer:",
+      "error": null,
+      "memory_rss_mb": 1282.6,
+      "memory_peak_mb": 1426.3
+    }
+  ]
+}
