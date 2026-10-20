@@ -108,7 +108,7 @@ def chunk_char_ngrams(chunk, ngram_size):
 def search_approximate(question, chunks, vocabulary, document_frequency,
                        top_k=5, max_distance=2, ngram_size=3,
                        weight_coverage=0.6, weight_words=0.25,
-                       weight_ngrams=0.15, method="combined"):
+                       weight_ngrams=0.15, method="combined", story=None):
 
     start_time = time.perf_counter()
 
@@ -128,9 +128,17 @@ def search_approximate(question, chunks, vocabulary, document_frequency,
     query_text = " ".join(corrected_terms)
     query_ngrams = char_ngrams(query_text, ngram_size)
 
+    if story is None:
+        searched_chunks = chunks
+    else:
+        searched_chunks = []
+        for chunk in chunks:
+            if chunk["story"] == story:
+                searched_chunks.append(chunk)
+
     scored_chunks = []
 
-    for chunk in chunks:
+    for chunk in searched_chunks:
 
         matched = query_words & chunk["content_tokens"]
 
@@ -187,7 +195,8 @@ def search_approximate(question, chunks, vocabulary, document_frequency,
         "query_terms": terms,
         "corrected_terms": corrected_terms,
         "corrections": corrections,
-        "chunks_examined": len(chunks),
+        "chunks_examined": len(searched_chunks),
+        "story_filter": story,
         "results": results
     }
 

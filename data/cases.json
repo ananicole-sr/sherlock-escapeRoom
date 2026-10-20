@@ -1,0 +1,107 @@
+[
+    {
+        "id": "case_1",
+        "title": "The Locked Room",
+        "story": "The Speckled Band",
+        "image": "data/images/case_1.png",
+        "intro": "Stoke Moran, April 1883. Helen Stoner's sister died in a bedroom locked from the inside. The windows were barred, the door was bolted, and the chimney was too narrow for a child. Her last words were: 'It was the band! The speckled band!' Two years later, Helen has been moved into that same room, and she has begun to hear a low whistle in the dark.",
+        "objective": "Discover what the speckled band really was.",
+        "clues": [
+            "The bell-rope beside the bed is a dummy. It is not attached to any wire and rings nothing at all.",
+            "The bed is clamped to the floor, so it can never be moved away from the rope.",
+            "In Dr. Roylott's room there is a safe, a saucer of milk, and a dog lash tied into a loop of whipcord."
+        ],
+        "suggested_questions": [
+            "What happened to the bell rope?",
+            "Where does the ventilator lead?",
+            "Why was the bed clamped to the floor?",
+            "What did Holmes find in Dr Roylott's room?"
+        ],
+        "riddle": "I am no band of cloth, though a band they named me.\nI crossed no floor, for the floor I never touched.\nI came down the rope that rang no bell,\nand returned to the hand that set out milk.\n\nWhat am I?",
+        "answer": "snake",
+        "accepted_answers": [
+            "snake",
+            "a snake",
+            "the snake",
+            "swamp adder",
+            "a swamp adder",
+            "the swamp adder",
+            "adder",
+            "serpent",
+            "a serpent",
+            "serpiente",
+            "vibora",
+            "víbora"
+        ],
+        "solution_note": "It was a swamp adder, the deadliest snake in India. Dr. Roylott sent it through the ventilator and down the dummy bell-rope, and called it back with a whistle and a saucer of milk."
+    },
+    {
+        "id": "case_2",
+        "title": "The Stolen Jewel",
+        "story": "The Blue Carbuncle",
+        "image": "data/images/case_2.png",
+        "intro": "London, the 27th of December. The Countess of Morcar has lost the blue carbuncle from her jewel-case at the Hotel Cosmopolitan. A plumber named John Horner has been arrested and swears he is innocent. Meanwhile, a commissionaire named Peterson has brought Holmes a battered hat and a Christmas goose, picked up in a scuffle on Tottenham Court Road.",
+        "objective": "Discover where the stolen gem was hidden.",
+        "clues": [
+            "Peterson's wife found the blue stone when she opened the bird in her kitchen.",
+            "The bird Ryder chose was white, with a barred tail, from a flock in a back yard on Brixton Road.",
+            "James Ryder, head attendant at the Hotel Cosmopolitan, had shown Horner up to the dressing-room that day."
+        ],
+        "suggested_questions": [
+            "Who found the blue carbuncle?",
+            "What did Peterson bring to Holmes?",
+            "Who was James Ryder?",
+            "Which goose had a barred tail?"
+        ],
+        "riddle": "A plumber stands charged, and the stone is gone.\nYet that night the jewel slept inside something living:\nwhite, with a barred tail, and bound for a Christmas table.\n\nWhere did the gem lie hidden?",
+        "answer": "goose",
+        "accepted_answers": [
+            "goose",
+            "a goose",
+            "the goose",
+            "in a goose",
+            "in the goose",
+            "crop",
+            "the crop",
+            "goose crop",
+            "the crop of a goose",
+            "ganso",
+            "un ganso",
+            "el ganso"
+        ],
+        "solution_note": "James Ryder forced the stone down the throat of a goose, into its crop. He picked the wrong bird from the flock, and the gem travelled to Tottenham Court Road inside it."
+    },
+    {
+        "id": "case_3",
+        "title": "The Secret Vault",
+        "story": "The Red-Headed League",
+        "image": "data/images/case_3.png",
+        "intro": "Saxe-Coburg Square. Jabez Wilson, a pawnbroker with flaming red hair, was paid four pounds a week to sit in an office and copy the Encyclopaedia Britannica by hand. This morning he found the door locked and a card announcing that the Red-Headed League is dissolved. His assistant, who offered to work for half wages, is nowhere to be found.",
+        "objective": "Discover what the assistant was really doing in the cellar.",
+        "clues": [
+            "The assistant was willing to work for half wages, and spent hours every day down in the cellar.",
+            "The knees of his trousers were worn, wrinkled and stained.",
+            "Holmes thumped the pavement outside the shop with his stick, and the Coburg branch of the City and Suburban Bank backs onto Wilson's premises."
+        ],
+        "suggested_questions": [
+            "What was the Red-Headed League?",
+            "Why did Holmes beat the pavement?",
+            "What did Holmes see on the assistant's trousers?",
+            "What was next to the pawnbroker's shop?"
+        ],
+        "riddle": "The league was a fiction, the copying a pretext,\ndesigned only to empty a shop for four hours a day.\nThe assistant asked for half wages and spent them underground,\nand his knees told the story his mouth did not.\n\nWhat was he digging?",
+        "answer": "tunnel",
+        "accepted_answers": [
+            "tunnel",
+            "a tunnel",
+            "the tunnel",
+            "tunel",
+            "túnel",
+            "un tunel",
+            "un túnel",
+            "underground tunnel",
+            "tunnel to the bank"
+        ],
+        "solution_note": "John Clay, under the name Vincent Spaulding, was burrowing a tunnel from the cellar of the pawnshop into the vault of the City and Suburban Bank next door."
+    }
+]
