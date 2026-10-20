@@ -1,10 +1,16 @@
 [theme]
 base = "dark"
-primaryColor = "#FF9F0A"
-backgroundColor = "#000000"
-secondaryBackgroundColor = "#1C1C1E"
-textColor = "#FFFFFF"
+primaryColor = "#C8A25A"
+backgroundColor = "#0C1017"
+secondaryBackgroundColor = "#1A2331"
+textColor = "#EDE6D8"
 font = "sans serif"
 
 [server]
 headless = true
+# Serves the scene images in static/ at app/static/.
+enableStaticServing = true
+# The file watcher inspects every loaded module on each rerun; with
+# transformers loaded that raises hundreds of harmless torchvision errors and
+# slows the app down. Restart `streamlit run app.py` after editing the code.
+fileWatcherType = "none"

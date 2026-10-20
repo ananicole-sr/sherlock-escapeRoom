@@ -3,14 +3,14 @@
     "words": 3784,
     "total_characters": 24510,
     "nodes": 11388,
-    "build_time_ms": 17.058765999536263
+    "build_time_ms": 15.201451002212707
   },
   "queries": [
     {
       "prefix": "bel",
       "matches": 6,
-      "trie_time_ms": 0.018512410006223945,
-      "linear_time_ms": 0.6948219200057792,
+      "trie_time_ms": 0.018937554996227846,
+      "linear_time_ms": 0.7176476099994034,
       "suggestions": [
         "believe",
         "bell",
@@ -22,8 +22,8 @@
     {
       "prefix": "ven",
       "matches": 3,
-      "trie_time_ms": 0.012190170000394573,
-      "linear_time_ms": 0.6876179550090455,
+      "trie_time_ms": 0.01375705498503521,
+      "linear_time_ms": 0.7176912700015237,
       "suggestions": [
         "ventilator",
         "ventilate",
@@ -33,8 +33,8 @@
     {
       "prefix": "goo",
       "matches": 4,
-      "trie_time_ms": 0.012885074993391754,
-      "linear_time_ms": 0.7077736899918818,
+      "trie_time_ms": 0.012962955006514676,
+      "linear_time_ms": 0.7190270000137389,
       "suggestions": [
         "good",
         "goose",
@@ -45,8 +45,8 @@
     {
       "prefix": "tun",
       "matches": 2,
-      "trie_time_ms": 0.00866745500388788,
-      "linear_time_ms": 0.6796642600056657,
+      "trie_time_ms": 0.008285664989671204,
+      "linear_time_ms": 0.7422032500107889,
       "suggestions": [
         "tunnel",
         "tunes"
@@ -55,8 +55,8 @@
     {
       "prefix": "car",
       "matches": 19,
-      "trie_time_ms": 0.05672346000210382,
-      "linear_time_ms": 0.7139859349990729,
+      "trie_time_ms": 0.05898789499042323,
+      "linear_time_ms": 0.7314699799826485,
       "suggestions": [
         "care",
         "carried",
@@ -68,8 +68,8 @@
     {
       "prefix": "sher",
       "matches": 1,
-      "trie_time_ms": 0.0067241650140204,
-      "linear_time_ms": 0.6862487499893177,
+      "trie_time_ms": 0.006768355015083216,
+      "linear_time_ms": 0.7135542049945798,
       "suggestions": [
         "sherlock"
       ]
@@ -77,8 +77,8 @@
     {
       "prefix": "ro",
       "matches": 27,
-      "trie_time_ms": 0.07646818499779329,
-      "linear_time_ms": 0.7304499450037838,
+      "trie_time_ms": 0.07761675500660203,
+      "linear_time_ms": 0.7364517899986822,
       "suggestions": [
         "room",
         "round",
@@ -90,8 +90,8 @@
     {
       "prefix": "sp",
       "matches": 30,
-      "trie_time_ms": 0.1040684899999178,
-      "linear_time_ms": 0.7221729000048072,
+      "trie_time_ms": 0.11205252998479409,
+      "linear_time_ms": 0.7483765500001027,
       "suggestions": [
         "spoke",
         "spaulding",
@@ -103,8 +103,8 @@
     {
       "prefix": "wh",
       "matches": 28,
-      "trie_time_ms": 0.08342212498973822,
-      "linear_time_ms": 0.7183432350029761,
+      "trie_time_ms": 0.08397967998462263,
+      "linear_time_ms": 0.7524902400109568,
       "suggestions": [
         "which",
         "what",
@@ -116,8 +116,8 @@
     {
       "prefix": "zzz",
       "matches": 0,
-      "trie_time_ms": 0.0014453350013354793,
-      "linear_time_ms": 0.7146846850082511,
+      "trie_time_ms": 0.0015983250341378152,
+      "linear_time_ms": 0.7110790349906893,
       "suggestions": []
     }
   ]
