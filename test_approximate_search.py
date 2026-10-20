@@ -109,6 +109,11 @@ def measure_collection_growth(chunks, vocabulary, document_frequency):
     question = "What happened to the bell rope in the bedroom?"
     sizes = [25, 50, 75, 100, 147]
 
+    # Warm-up: the first search builds the character n-gram cache of every
+    # chunk. Without this call the smallest collection would absorb that cost
+    # and the table would not show the real growth.
+    search_approximate(question, chunks, vocabulary, document_frequency, top_k=3)
+
     print(f"{'chunks':>8} {'time(ms)':>10} {'ms per chunk':>14}")
     print("-" * 35)
 
