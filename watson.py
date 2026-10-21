@@ -29,6 +29,7 @@ import re
 import threading
 import time
 
+from query_processing import extract_query_terms
 from text_cleaner import tokenize
 
 MODELS = {
@@ -275,6 +276,16 @@ def passage_line(position, story, excerpt):
     return f"[{position}] ({story}) {excerpt}"
 
 
+def question_terms(question):
+    """
+        Terms of the question used to pick fragments and sentences. Same
+        preprocessing as the search engines (query_processing): before, the
+        raw tokens were used, so stopwords such as "what", "did" or "the"
+        and the "s" of possessives counted as matches.
+    """
+    return set(extract_query_terms(question))
+
+
 def select_context(question, results, max_chunks=None):
     """
         Chooses the fragments that will be sent to the model.
@@ -287,7 +298,7 @@ def select_context(question, results, max_chunks=None):
     if max_chunks is None:
         max_chunks = current_spec()["max_chunks"]
 
-    terms = set(tokenize(question))
+    terms = question_terms(question)
 
     candidates = []
 
@@ -347,8 +358,16 @@ def select_context(question, results, max_chunks=None):
         if budget < 40:
             break
 
-        excerpt = best_window(result["text"], chunk_terms, budget)
+        # The whole fragment is sent when it fits; it is trimmed to its most
+        # relevant sentences only when it does not.
+        excerpt = result["text"]
         tokens = count_tokens(excerpt)
+        trimmed = False
+
+        if tokens > budget:
+            excerpt = best_window(result["text"], chunk_terms, budget)
+            tokens = count_tokens(excerpt)
+            trimmed = True
 
         if used + tokens + label_tokens > available:
             break
@@ -360,8 +379,14 @@ def select_context(question, results, max_chunks=None):
             "story": result["story"],
             "score": result["score"],
             "excerpt": excerpt,
-            "tokens": tokens
+            "tokens": tokens,
+            "trimmed": trimmed
         })
+
+    # Final check on the real prompt (instructions + passages + question):
+    # if rounding left it over the budget, drop passages from the end.
+    while len(context) > 0 and count_prompt_tokens(build_prompt(question, context)) > input_budget():
+        context.pop()
 
     return context
 
