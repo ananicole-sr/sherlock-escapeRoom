@@ -99,14 +99,11 @@ def draw_finale(cases):
 
 def draw_finale_head():
     st.markdown(
-        "<div class='finale-head'><div class='kicker'>All three case files are closed</div>"
-        "<h1>The trail is complete</h1>"
-        "<p>A snake on a bell-rope, a gem in a goose, a tunnel under a bank. "
-        "Every deduction Holmes once made, you have made again. "
-        "All three cases are solved. Holmes can be found.</p></div>"
-        "<div class='pending-banner'><b>Final chapter pending.</b> The ending of the "
-        "story (where Holmes is and why he left) has not been written by the team yet. "
-        "This screen is a placeholder, not the definitive conclusion.</div>",
+        "<div class='finale-head'>"
+        "<h1>Investigation complete</h1>"
+        "<p>You have solved all three cases. Your deductions uncovered a deadly snake, "
+        "a jewel hidden inside a goose, and a tunnel leading to a bank cellar.</p>"
+        "<p>Thank you for playing The Final Case.</p></div>",
         unsafe_allow_html=True
     )
 
