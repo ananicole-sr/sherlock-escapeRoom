@@ -1,0 +1,1239 @@
+{
+  "status": "Preliminary AI assessment, pending human review. Not a human evaluation.",
+  "version": 2,
+  "sources": {
+    "version_1": "reports/evaluation_review.md",
+    "corrections": "reports/evaluation_review_corrections.md",
+    "answers_and_contexts": "data/evaluation_results.json (unchanged)"
+  },
+  "corrected_references": {
+    "RH05": {
+      "v1_expected_answer": "French gold: napoleons, 2,000 in each crate, packed between layers of lead foil.",
+      "v2_expected_answer": "French gold: napoleons packed between layers of lead foil. The crate Merryweather sits on contains 2,000 napoleons; 30,000 were borrowed in total.",
+      "reason": "The story gives the quantity for one crate only (\"The crate upon which I sit contains 2,000 napoleons\") and the total borrowed (\"30,000 napoleons from the Bank of France\"); it never says \"each crate\". data/evaluation_questions.json is left unchanged; this is the corrected reference used in version 2."
+    }
+  },
+  "corrections": [
+    {
+      "id": "SB02",
+      "engines": [
+        "kmp",
+        "z"
+      ],
+      "set": {
+        "support": "completo"
+      },
+      "justification": "speckled_band_035 says the ventilator opens \"into another room\" instead of \"the outside air\", which supports, by inference, that it leads inside the house. The answer is incomplete (it does not say another room, nor Roylott's) but makes no unsupported claim: correctness stays partial, support becomes complete.",
+      "reason": "v1 mixed incompleteness with lack of support."
+    },
+    {
+      "id": "RH05",
+      "engines": [
+        "kmp",
+        "z",
+        "approximate"
+      ],
+      "set": {
+        "correctness": "parcial",
+        "support": "parcial"
+      },
+      "justification": "red_headed_league_040 supports napoleons packed between layers of lead foil and \"Your French gold?\". \"The crates contained 2,000 napoleons\" generalizes the quantity of one crate to the crates (the text gives 2,000 for one crate and 30,000 in total), and the answer omits that it is French gold.",
+      "reason": "v1 accepted the quantity against a reference (\"2,000 in each crate\") that the story does not support."
+    },
+    {
+      "id": "RH06",
+      "engines": [
+        "approximate"
+      ],
+      "set": {
+        "correctness": "abstención (no válida)"
+      },
+      "justification": "\"The passage does not mention a girl named Cook\" is true for the context (no girl appears in it) and invents nothing, but it reads \"cooked\" as the name \"Cook\" and denies something the question did not ask. It does not say that the girl's name is unknown, so it is not a valid abstention on the question asked, although abstaining would have been appropriate.",
+      "reason": "v1 counted a misread question as an appropriate abstention."
+    }
+  ],
+  "entries": [
+    {
+      "id": "SB01",
+      "type": "direct",
+      "engine": "kmp",
+      "context_usefulness": "suficiente",
+      "correctness": "parcial",
+      "support": "parcial",
+      "justification": "El contexto incluye speckled_band_016 con el grito completo: \"Oh, my God! Helen! It was the band! The speckled band!\". Watson cita solo \"Oh, my God!\" y lo presenta como sus palabras finales, omitiendo la parte esencial (\"the speckled band\").",
+      "question": "What were the last words of Helen Stoner's sister?",
+      "answer": "Helen Stoner's sister's final words were \"Oh, my God!\"",
+      "context_chunk_ids": [
+        "speckled_band_023",
+        "speckled_band_016",
+        "speckled_band_007",
+        "speckled_band_009"
+      ],
+      "expected_answer": "\"It was the band! The speckled band!\"",
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB02",
+      "type": "direct",
+      "engine": "kmp",
+      "context_usefulness": "suficiente",
+      "correctness": "parcial",
+      "support": "completo",
+      "justification": "speckled_band_035 says the ventilator opens \"into another room\" instead of \"the outside air\", which supports, by inference, that it leads inside the house. The answer is incomplete (it does not say another room, nor Roylott's) but makes no unsupported claim: correctness stays partial, support becomes complete.",
+      "question": "Where did the ventilator in Helen Stoner's room lead?",
+      "answer": "To the inside of the house",
+      "context_chunk_ids": [
+        "speckled_band_035",
+        "speckled_band_053",
+        "speckled_band_038",
+        "speckled_band_013"
+      ],
+      "expected_answer": "Into another room (Dr. Roylott's), not to the outside air.",
+      "changed_in_v2": true,
+      "v1": {
+        "context_usefulness": "suficiente",
+        "correctness": "parcial",
+        "support": "parcial",
+        "justification": "speckled_band_035 dice que el ventilador abre \"into another room\" y no al exterior; speckled_band_053 permite inferir que es el cuarto de Roylott (se subía a la silla para alcanzarlo). \"To the inside of the house\" no contradice el texto pero es vago: no dice que lleva a otro cuarto ni a cuál."
+      },
+      "correction_reason": "v1 mixed incompleteness with lack of support."
+    },
+    {
+      "id": "SB03",
+      "type": "direct",
+      "engine": "kmp",
+      "context_usefulness": "insuficiente",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "El fragmento con el plato de leche (speckled_band_036) no llegó. speckled_band_048 dice que la linterna estaba \"on the table\" y alumbraba la caja fuerte; afirmar que estaba encima de la caja fuerte contradice el contexto.",
+      "question": "What did Holmes find on top of the iron safe in Dr. Roylott's room?",
+      "answer": "On top of the iron safe, Holmes found a dark lantern with a shutter half open, casting a bright beam of light onto the iron safe door.",
+      "context_chunk_ids": [
+        "speckled_band_048",
+        "speckled_band_040",
+        "speckled_band_002",
+        "speckled_band_030"
+      ],
+      "expected_answer": "A small saucer of milk.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB04",
+      "type": "paraphrase",
+      "engine": "kmp",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "speckled_band_042: \"It was clamped to the floor\" y \"The lady could not move her bed\".",
+      "question": "Why could Helen Stoner not move her bed?",
+      "answer": "Helen Stoner could not move her bed because it was clamped to the floor.",
+      "context_chunk_ids": [
+        "speckled_band_042",
+        "speckled_band_032",
+        "speckled_band_033",
+        "speckled_band_051"
+      ],
+      "expected_answer": "It was clamped to the floor.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB05",
+      "type": "misspelled",
+      "engine": "kmp",
+      "context_usefulness": "insuficiente",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "Ningún fragmento del contexto menciona el guepardo, el babuino ni animales. Los libros, artefactos, manuscritos y pinturas no aparecen en el contexto: son inventados.",
+      "question": "What animls did Dr. Roylot keep at Stoke Moran?",
+      "answer": "Dr. Roylot kept a large collection of books and artifacts at Stoke Moran, including a collection of ancient manuscripts and a collection of rare paintings.",
+      "context_chunk_ids": [
+        "speckled_band_009",
+        "speckled_band_025",
+        "speckled_band_029",
+        "speckled_band_040"
+      ],
+      "expected_answer": "A cheetah and a baboon (he had a passion for Indian animals).",
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB06",
+      "type": "misspelled",
+      "engine": "kmp",
+      "context_usefulness": "suficiente",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "speckled_band_049 está en el contexto: \"It is a swamp adder! … the deadliest snake in India\". \"A supernatural entity\" contradice el contexto, y quien murió fue la hermana de Helen, no Helen.",
+      "question": "What was the speckld band realy?",
+      "answer": "The speckled band was a supernatural entity believed to be responsible for Helen's death.",
+      "context_chunk_ids": [
+        "speckled_band_018",
+        "speckled_band_049",
+        "speckled_band_016",
+        "speckled_band_023"
+      ],
+      "expected_answer": "A swamp adder, the deadliest snake in India.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB07",
+      "type": "unanswerable",
+      "engine": "kmp",
+      "context_usefulness": "insuficiente (esperado: pregunta sin respuesta)",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "Ni \"curtain\" ni \"black\" aparecen en el contexto. Debió abstenerse; inventa el color.",
+      "question": "What colour were the curtains in Helen Stoner's bedroom?",
+      "answer": "The curtains in Helen Stoner's bedroom were black.",
+      "context_chunk_ids": [
+        "speckled_band_007",
+        "speckled_band_023",
+        "speckled_band_009",
+        "speckled_band_029"
+      ],
+      "expected_answer": null,
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC01",
+      "type": "direct",
+      "engine": "kmp",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "blue_carbuncle_004: Peterson quedó \"in possession … of this battered hat and a most unimpeachable Christmas goose\"; blue_carbuncle_003 lo identifica. Omite \"commissionaire\", detalle no esencial.",
+      "question": "Who picked up the hat and the goose after the fight on Tottenham Court Road?",
+      "answer": "Peterson picked up the hat and the goose after the fight on Tottenham Court Road.",
+      "context_chunk_ids": [
+        "blue_carbuncle_015",
+        "blue_carbuncle_004",
+        "blue_carbuncle_003",
+        "blue_carbuncle_005"
+      ],
+      "expected_answer": "Peterson, the commissionaire.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC02",
+      "type": "direct",
+      "engine": "kmp",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "blue_carbuncle_006: \"the initials 'H. B.' were scrawled upon one side\" (también en 005).",
+      "question": "What initials were written inside the hat?",
+      "answer": "The initials \"H. B.\" were written inside the hat.",
+      "context_chunk_ids": [
+        "blue_carbuncle_005",
+        "blue_carbuncle_006",
+        "blue_carbuncle_010",
+        "blue_carbuncle_008"
+      ],
+      "expected_answer": "H. B. (the card on the goose read 'For Mrs. Henry Baker').",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC03",
+      "type": "direct",
+      "engine": "kmp",
+      "context_usefulness": "suficiente",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "blue_carbuncle_012 está en el contexto: \"See what my wife found in its crop!\". Watson responde con el estuche de joyas de la condesa, que en blue_carbuncle_014 es de donde se robó la piedra, no donde la encontró la esposa de Peterson.",
+      "question": "Where did Peterson's wife find the blue stone?",
+      "answer": "Peterson's wife found the blue stone in the Countess of Morcar's jewel-case.",
+      "context_chunk_ids": [
+        "blue_carbuncle_012",
+        "blue_carbuncle_017",
+        "blue_carbuncle_014",
+        "blue_carbuncle_035"
+      ],
+      "expected_answer": "In the crop of the goose.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC04",
+      "type": "direct",
+      "engine": "kmp",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "blue_carbuncle_014: \"John Horner, 26, plumber, was brought up upon the charge …\". Omite que era plomero, detalle no esencial.",
+      "question": "Who was accused of stealing the Countess of Morcar's jewel?",
+      "answer": "John Horner was accused of stealing the Countess of Morcar's jewel.",
+      "context_chunk_ids": [
+        "blue_carbuncle_014",
+        "blue_carbuncle_013",
+        "blue_carbuncle_035",
+        "blue_carbuncle_012"
+      ],
+      "expected_answer": "John Horner, a plumber.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC05",
+      "type": "misspelled",
+      "engine": "kmp",
+      "context_usefulness": "suficiente",
+      "correctness": "incorrecta",
+      "support": "completo",
+      "justification": "blue_carbuncle_024 contiene \"Breckinridge is his name\". La respuesta repite la pregunta sin nombrar al vendedor: lo que afirma está en el contexto, pero no responde. No es una abstención.",
+      "question": "Wich dealer in Covent Gardn sold the geese to the Alpha Inn?",
+      "answer": "The dealer in Covent Garden sold the geese to the Alpha Inn.",
+      "context_chunk_ids": [
+        "blue_carbuncle_024",
+        "blue_carbuncle_041",
+        "blue_carbuncle_026",
+        "blue_carbuncle_025"
+      ],
+      "expected_answer": "Breckinridge.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC06",
+      "type": "misspelled",
+      "engine": "kmp",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "blue_carbuncle_032: \"is John Robinson\" … \"my real name is James Ryder\".",
+      "question": "What was the real name of the man who called himself John Robinsn?",
+      "answer": "The real name of the man who called himself John Robinson was James Ryder.",
+      "context_chunk_ids": [
+        "blue_carbuncle_032",
+        "blue_carbuncle_004",
+        "blue_carbuncle_025",
+        "blue_carbuncle_006"
+      ],
+      "expected_answer": "James Ryder.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC07",
+      "type": "unanswerable",
+      "engine": "kmp",
+      "context_usefulness": "insuficiente (esperado: pregunta sin respuesta)",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "Ni \"carriage\" ni \"black\" aparecen en el contexto. Debió abstenerse; inventa el color.",
+      "question": "What colour was the Countess of Morcar's carriage?",
+      "answer": "The Countess of Morcar's carriage was black.",
+      "context_chunk_ids": [
+        "blue_carbuncle_014",
+        "blue_carbuncle_012",
+        "blue_carbuncle_035",
+        "blue_carbuncle_013"
+      ],
+      "expected_answer": null,
+      "changed_in_v2": false
+    },
+    {
+      "id": "RH01",
+      "type": "direct",
+      "engine": "kmp",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "red_headed_league_007: \"a salary of £ 4 a week\" para un miembro de la Liga.",
+      "question": "How much was Jabez Wilson paid each week by the Red-Headed League?",
+      "answer": "According to the passage, Jabez Wilson was paid £4 per week for being a member of the League.",
+      "context_chunk_ids": [
+        "red_headed_league_007",
+        "red_headed_league_001",
+        "red_headed_league_010",
+        "red_headed_league_011"
+      ],
+      "expected_answer": "Four pounds (£4) a week.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "RH02",
+      "type": "direct",
+      "engine": "kmp",
+      "context_usefulness": "suficiente",
+      "correctness": "parcial",
+      "support": "parcial",
+      "justification": "El fragmento de la cita guardada (044) no llegó, pero sí red_headed_league_045, donde John Clay es esposado (\"said John Clay serenely\"), y 047/048 vinculan al ayudante con el delincuente. Según el relato el ayudante es John Clay, así que la respuesta es correcta en lo esencial, pero no da el nombre que el contexto sí ofrecía. La comprobación automática marcó la evidencia como ausente; en realidad el contexto era suficiente.",
+      "question": "Who was caught in the bank cellar at the end of the case?",
+      "answer": "At the end of the case, the assistant was caught in the bank cellar.",
+      "context_chunk_ids": [
+        "red_headed_league_048",
+        "red_headed_league_042",
+        "red_headed_league_045",
+        "red_headed_league_047"
+      ],
+      "expected_answer": "John Clay.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "RH03",
+      "type": "paraphrase",
+      "engine": "kmp",
+      "context_usefulness": "insuficiente",
+      "correctness": "incorrecta",
+      "support": "completo",
+      "justification": "El fragmento con el motivo (red_headed_league_046) no llegó, y ningún otro del contexto lo explica. La respuesta solo repite que le pagaban por copiar la enciclopedia, sin dar el motivo; lo que afirma sí está en el contexto.",
+      "question": "Why was Jabez Wilson paid to copy the Encyclopaedia?",
+      "answer": "Jabez Wilson was paid to copy the _Encyclopædia Britannica_.",
+      "context_chunk_ids": [
+        "red_headed_league_019",
+        "red_headed_league_008",
+        "red_headed_league_003",
+        "red_headed_league_005"
+      ],
+      "expected_answer": "To get him out of the way for a number of hours every day.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "RH04",
+      "type": "misspelled",
+      "engine": "kmp",
+      "context_usefulness": "insuficiente",
+      "correctness": "incorrecta",
+      "support": "parcial",
+      "justification": "El fragmento con la explicación del pavimento (red_headed_league_048) no llegó. Watson describe otro momento: el golpe con el bastón de caza en la muñeca está en red_headed_league_044, pero \"causing him to fall down the hole\" no (es el otro hombre quien \"dived down the hole\"). No responde por qué golpeó el pavimento.",
+      "question": "Why did Holmes beat the pavment with his stik?",
+      "answer": "Holmes used his hunting crop to hit the man's wrist, causing him to fall down the hole.",
+      "context_chunk_ids": [
+        "red_headed_league_044",
+        "red_headed_league_024",
+        "red_headed_league_026",
+        "red_headed_league_001"
+      ],
+      "expected_answer": "To find out whether the cellar stretched out in front or behind.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "RH05",
+      "type": "direct",
+      "engine": "kmp",
+      "context_usefulness": "suficiente",
+      "correctness": "parcial",
+      "support": "parcial",
+      "justification": "red_headed_league_040 supports napoleons packed between layers of lead foil and \"Your French gold?\". \"The crates contained 2,000 napoleons\" generalizes the quantity of one crate to the crates (the text gives 2,000 for one crate and 30,000 in total), and the answer omits that it is French gold.",
+      "question": "What was stored in the crates in the bank cellar?",
+      "answer": "In the bank cellar, the crates contained 2,000 napoleons packed between layers of lead foil.",
+      "context_chunk_ids": [
+        "red_headed_league_045",
+        "red_headed_league_048",
+        "red_headed_league_038",
+        "red_headed_league_040"
+      ],
+      "expected_answer": "French gold: napoleons packed between layers of lead foil. The crate Merryweather sits on contains 2,000 napoleons; 30,000 were borrowed in total.",
+      "changed_in_v2": true,
+      "v1": {
+        "context_usefulness": "suficiente",
+        "correctness": "correcta",
+        "support": "completo",
+        "justification": "red_headed_league_040: \"2,000 napoleons packed between layers of lead foil\" y \"Your French gold?\". Omite \"French gold\" y es ambigua sobre si son 2,000 por caja o en total (el texto dice que esa caja contiene 2,000 de los 30,000)."
+      },
+      "correction_reason": "v1 accepted the quantity against a reference (\"2,000 in each crate\") that the story does not support."
+    },
+    {
+      "id": "RH06",
+      "type": "unanswerable",
+      "engine": "kmp",
+      "context_usefulness": "insuficiente (esperado: pregunta sin respuesta)",
+      "correctness": "abstención (apropiada)",
+      "support": "parcial",
+      "justification": "Termina con \"the name of the girl … is not explicitly mentioned\", que es correcto: el contexto no la menciona. Pero antes cita dos frases irrelevantes, una alterada (\"one of the most singular that I have ever listened to\" frente a \"one of the most singular which I have listened to for some time\").",
+      "question": "What was the name of the girl who cooked for Jabez Wilson?",
+      "answer": "The passage mentions that \"Jabez Wilson here has been good enough to call upon me this morning, and to begin a narrative which promises to be one of the most singular that I have ever listened to.\" The narrator states, \"As a rule, when I have heard some slight indication of the course of events, I am able to guide myself by the thousands of other similar cases which occur to my memory.\" Therefore, the name of the girl who cooked for Jabez Wilson is not explicitly mentioned in the passage provided.",
+      "context_chunk_ids": [
+        "red_headed_league_005",
+        "red_headed_league_008",
+        "red_headed_league_003",
+        "red_headed_league_009"
+      ],
+      "expected_answer": null,
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB01",
+      "type": "direct",
+      "engine": "z",
+      "context_usefulness": "suficiente",
+      "correctness": "parcial",
+      "support": "parcial",
+      "justification": "El contexto incluye speckled_band_016 con el grito completo: \"Oh, my God! Helen! It was the band! The speckled band!\". Watson cita solo \"Oh, my God!\" y lo presenta como sus palabras finales, omitiendo la parte esencial (\"the speckled band\").",
+      "question": "What were the last words of Helen Stoner's sister?",
+      "answer": "Helen Stoner's sister's final words were \"Oh, my God!\"",
+      "context_chunk_ids": [
+        "speckled_band_023",
+        "speckled_band_016",
+        "speckled_band_007",
+        "speckled_band_009"
+      ],
+      "expected_answer": "\"It was the band! The speckled band!\"",
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB02",
+      "type": "direct",
+      "engine": "z",
+      "context_usefulness": "suficiente",
+      "correctness": "parcial",
+      "support": "completo",
+      "justification": "speckled_band_035 says the ventilator opens \"into another room\" instead of \"the outside air\", which supports, by inference, that it leads inside the house. The answer is incomplete (it does not say another room, nor Roylott's) but makes no unsupported claim: correctness stays partial, support becomes complete.",
+      "question": "Where did the ventilator in Helen Stoner's room lead?",
+      "answer": "To the inside of the house",
+      "context_chunk_ids": [
+        "speckled_band_035",
+        "speckled_band_053",
+        "speckled_band_038",
+        "speckled_band_013"
+      ],
+      "expected_answer": "Into another room (Dr. Roylott's), not to the outside air.",
+      "changed_in_v2": true,
+      "v1": {
+        "context_usefulness": "suficiente",
+        "correctness": "parcial",
+        "support": "parcial",
+        "justification": "speckled_band_035 dice que el ventilador abre \"into another room\" y no al exterior; speckled_band_053 permite inferir que es el cuarto de Roylott (se subía a la silla para alcanzarlo). \"To the inside of the house\" no contradice el texto pero es vago: no dice que lleva a otro cuarto ni a cuál."
+      },
+      "correction_reason": "v1 mixed incompleteness with lack of support."
+    },
+    {
+      "id": "SB03",
+      "type": "direct",
+      "engine": "z",
+      "context_usefulness": "insuficiente",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "El fragmento con el plato de leche (speckled_band_036) no llegó. speckled_band_048 dice que la linterna estaba \"on the table\" y alumbraba la caja fuerte; afirmar que estaba encima de la caja fuerte contradice el contexto.",
+      "question": "What did Holmes find on top of the iron safe in Dr. Roylott's room?",
+      "answer": "On top of the iron safe, Holmes found a dark lantern with a shutter half open, casting a bright beam of light onto the iron safe door.",
+      "context_chunk_ids": [
+        "speckled_band_048",
+        "speckled_band_040",
+        "speckled_band_002",
+        "speckled_band_030"
+      ],
+      "expected_answer": "A small saucer of milk.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB04",
+      "type": "paraphrase",
+      "engine": "z",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "speckled_band_042: \"It was clamped to the floor\" y \"The lady could not move her bed\".",
+      "question": "Why could Helen Stoner not move her bed?",
+      "answer": "Helen Stoner could not move her bed because it was clamped to the floor.",
+      "context_chunk_ids": [
+        "speckled_band_042",
+        "speckled_band_032",
+        "speckled_band_033",
+        "speckled_band_051"
+      ],
+      "expected_answer": "It was clamped to the floor.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB05",
+      "type": "misspelled",
+      "engine": "z",
+      "context_usefulness": "insuficiente",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "Ningún fragmento del contexto menciona el guepardo, el babuino ni animales. Los libros, artefactos, manuscritos y pinturas no aparecen en el contexto: son inventados.",
+      "question": "What animls did Dr. Roylot keep at Stoke Moran?",
+      "answer": "Dr. Roylot kept a large collection of books and artifacts at Stoke Moran, including a collection of ancient manuscripts and a collection of rare paintings.",
+      "context_chunk_ids": [
+        "speckled_band_009",
+        "speckled_band_025",
+        "speckled_band_029",
+        "speckled_band_040"
+      ],
+      "expected_answer": "A cheetah and a baboon (he had a passion for Indian animals).",
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB06",
+      "type": "misspelled",
+      "engine": "z",
+      "context_usefulness": "suficiente",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "speckled_band_049 está en el contexto: \"It is a swamp adder! … the deadliest snake in India\". \"A supernatural entity\" contradice el contexto, y quien murió fue la hermana de Helen, no Helen.",
+      "question": "What was the speckld band realy?",
+      "answer": "The speckled band was a supernatural entity believed to be responsible for Helen's death.",
+      "context_chunk_ids": [
+        "speckled_band_018",
+        "speckled_band_049",
+        "speckled_band_016",
+        "speckled_band_023"
+      ],
+      "expected_answer": "A swamp adder, the deadliest snake in India.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB07",
+      "type": "unanswerable",
+      "engine": "z",
+      "context_usefulness": "insuficiente (esperado: pregunta sin respuesta)",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "Ni \"curtain\" ni \"black\" aparecen en el contexto. Debió abstenerse; inventa el color.",
+      "question": "What colour were the curtains in Helen Stoner's bedroom?",
+      "answer": "The curtains in Helen Stoner's bedroom were black.",
+      "context_chunk_ids": [
+        "speckled_band_007",
+        "speckled_band_023",
+        "speckled_band_009",
+        "speckled_band_029"
+      ],
+      "expected_answer": null,
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC01",
+      "type": "direct",
+      "engine": "z",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "blue_carbuncle_004: Peterson quedó \"in possession … of this battered hat and a most unimpeachable Christmas goose\"; blue_carbuncle_003 lo identifica. Omite \"commissionaire\", detalle no esencial.",
+      "question": "Who picked up the hat and the goose after the fight on Tottenham Court Road?",
+      "answer": "Peterson picked up the hat and the goose after the fight on Tottenham Court Road.",
+      "context_chunk_ids": [
+        "blue_carbuncle_015",
+        "blue_carbuncle_004",
+        "blue_carbuncle_003",
+        "blue_carbuncle_005"
+      ],
+      "expected_answer": "Peterson, the commissionaire.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC02",
+      "type": "direct",
+      "engine": "z",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "blue_carbuncle_006: \"the initials 'H. B.' were scrawled upon one side\" (también en 005).",
+      "question": "What initials were written inside the hat?",
+      "answer": "The initials \"H. B.\" were written inside the hat.",
+      "context_chunk_ids": [
+        "blue_carbuncle_005",
+        "blue_carbuncle_006",
+        "blue_carbuncle_010",
+        "blue_carbuncle_008"
+      ],
+      "expected_answer": "H. B. (the card on the goose read 'For Mrs. Henry Baker').",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC03",
+      "type": "direct",
+      "engine": "z",
+      "context_usefulness": "suficiente",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "blue_carbuncle_012 está en el contexto: \"See what my wife found in its crop!\". Watson responde con el estuche de joyas de la condesa, que en blue_carbuncle_014 es de donde se robó la piedra, no donde la encontró la esposa de Peterson.",
+      "question": "Where did Peterson's wife find the blue stone?",
+      "answer": "Peterson's wife found the blue stone in the Countess of Morcar's jewel-case.",
+      "context_chunk_ids": [
+        "blue_carbuncle_012",
+        "blue_carbuncle_017",
+        "blue_carbuncle_014",
+        "blue_carbuncle_035"
+      ],
+      "expected_answer": "In the crop of the goose.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC04",
+      "type": "direct",
+      "engine": "z",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "blue_carbuncle_014: \"John Horner, 26, plumber, was brought up upon the charge …\". Omite que era plomero, detalle no esencial.",
+      "question": "Who was accused of stealing the Countess of Morcar's jewel?",
+      "answer": "John Horner was accused of stealing the Countess of Morcar's jewel.",
+      "context_chunk_ids": [
+        "blue_carbuncle_014",
+        "blue_carbuncle_013",
+        "blue_carbuncle_035",
+        "blue_carbuncle_012"
+      ],
+      "expected_answer": "John Horner, a plumber.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC05",
+      "type": "misspelled",
+      "engine": "z",
+      "context_usefulness": "suficiente",
+      "correctness": "incorrecta",
+      "support": "completo",
+      "justification": "blue_carbuncle_024 contiene \"Breckinridge is his name\". La respuesta repite la pregunta sin nombrar al vendedor: lo que afirma está en el contexto, pero no responde. No es una abstención.",
+      "question": "Wich dealer in Covent Gardn sold the geese to the Alpha Inn?",
+      "answer": "The dealer in Covent Garden sold the geese to the Alpha Inn.",
+      "context_chunk_ids": [
+        "blue_carbuncle_024",
+        "blue_carbuncle_041",
+        "blue_carbuncle_026",
+        "blue_carbuncle_025"
+      ],
+      "expected_answer": "Breckinridge.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC06",
+      "type": "misspelled",
+      "engine": "z",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "blue_carbuncle_032: \"is John Robinson\" … \"my real name is James Ryder\".",
+      "question": "What was the real name of the man who called himself John Robinsn?",
+      "answer": "The real name of the man who called himself John Robinson was James Ryder.",
+      "context_chunk_ids": [
+        "blue_carbuncle_032",
+        "blue_carbuncle_004",
+        "blue_carbuncle_025",
+        "blue_carbuncle_006"
+      ],
+      "expected_answer": "James Ryder.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC07",
+      "type": "unanswerable",
+      "engine": "z",
+      "context_usefulness": "insuficiente (esperado: pregunta sin respuesta)",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "Ni \"carriage\" ni \"black\" aparecen en el contexto. Debió abstenerse; inventa el color.",
+      "question": "What colour was the Countess of Morcar's carriage?",
+      "answer": "The Countess of Morcar's carriage was black.",
+      "context_chunk_ids": [
+        "blue_carbuncle_014",
+        "blue_carbuncle_012",
+        "blue_carbuncle_035",
+        "blue_carbuncle_013"
+      ],
+      "expected_answer": null,
+      "changed_in_v2": false
+    },
+    {
+      "id": "RH01",
+      "type": "direct",
+      "engine": "z",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "red_headed_league_007: \"a salary of £ 4 a week\" para un miembro de la Liga.",
+      "question": "How much was Jabez Wilson paid each week by the Red-Headed League?",
+      "answer": "According to the passage, Jabez Wilson was paid £4 per week for being a member of the League.",
+      "context_chunk_ids": [
+        "red_headed_league_007",
+        "red_headed_league_001",
+        "red_headed_league_010",
+        "red_headed_league_011"
+      ],
+      "expected_answer": "Four pounds (£4) a week.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "RH02",
+      "type": "direct",
+      "engine": "z",
+      "context_usefulness": "suficiente",
+      "correctness": "parcial",
+      "support": "parcial",
+      "justification": "El fragmento de la cita guardada (044) no llegó, pero sí red_headed_league_045, donde John Clay es esposado (\"said John Clay serenely\"), y 047/048 vinculan al ayudante con el delincuente. Según el relato el ayudante es John Clay, así que la respuesta es correcta en lo esencial, pero no da el nombre que el contexto sí ofrecía. La comprobación automática marcó la evidencia como ausente; en realidad el contexto era suficiente.",
+      "question": "Who was caught in the bank cellar at the end of the case?",
+      "answer": "At the end of the case, the assistant was caught in the bank cellar.",
+      "context_chunk_ids": [
+        "red_headed_league_048",
+        "red_headed_league_042",
+        "red_headed_league_045",
+        "red_headed_league_047"
+      ],
+      "expected_answer": "John Clay.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "RH03",
+      "type": "paraphrase",
+      "engine": "z",
+      "context_usefulness": "insuficiente",
+      "correctness": "incorrecta",
+      "support": "completo",
+      "justification": "El fragmento con el motivo (red_headed_league_046) no llegó, y ningún otro del contexto lo explica. La respuesta solo repite que le pagaban por copiar la enciclopedia, sin dar el motivo; lo que afirma sí está en el contexto.",
+      "question": "Why was Jabez Wilson paid to copy the Encyclopaedia?",
+      "answer": "Jabez Wilson was paid to copy the _Encyclopædia Britannica_.",
+      "context_chunk_ids": [
+        "red_headed_league_019",
+        "red_headed_league_008",
+        "red_headed_league_003",
+        "red_headed_league_005"
+      ],
+      "expected_answer": "To get him out of the way for a number of hours every day.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "RH04",
+      "type": "misspelled",
+      "engine": "z",
+      "context_usefulness": "insuficiente",
+      "correctness": "incorrecta",
+      "support": "parcial",
+      "justification": "El fragmento con la explicación del pavimento (red_headed_league_048) no llegó. Watson describe otro momento: el golpe con el bastón de caza en la muñeca está en red_headed_league_044, pero \"causing him to fall down the hole\" no (es el otro hombre quien \"dived down the hole\"). No responde por qué golpeó el pavimento.",
+      "question": "Why did Holmes beat the pavment with his stik?",
+      "answer": "Holmes used his hunting crop to hit the man's wrist, causing him to fall down the hole.",
+      "context_chunk_ids": [
+        "red_headed_league_044",
+        "red_headed_league_024",
+        "red_headed_league_026",
+        "red_headed_league_001"
+      ],
+      "expected_answer": "To find out whether the cellar stretched out in front or behind.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "RH05",
+      "type": "direct",
+      "engine": "z",
+      "context_usefulness": "suficiente",
+      "correctness": "parcial",
+      "support": "parcial",
+      "justification": "red_headed_league_040 supports napoleons packed between layers of lead foil and \"Your French gold?\". \"The crates contained 2,000 napoleons\" generalizes the quantity of one crate to the crates (the text gives 2,000 for one crate and 30,000 in total), and the answer omits that it is French gold.",
+      "question": "What was stored in the crates in the bank cellar?",
+      "answer": "In the bank cellar, the crates contained 2,000 napoleons packed between layers of lead foil.",
+      "context_chunk_ids": [
+        "red_headed_league_045",
+        "red_headed_league_048",
+        "red_headed_league_038",
+        "red_headed_league_040"
+      ],
+      "expected_answer": "French gold: napoleons packed between layers of lead foil. The crate Merryweather sits on contains 2,000 napoleons; 30,000 were borrowed in total.",
+      "changed_in_v2": true,
+      "v1": {
+        "context_usefulness": "suficiente",
+        "correctness": "correcta",
+        "support": "completo",
+        "justification": "red_headed_league_040: \"2,000 napoleons packed between layers of lead foil\" y \"Your French gold?\". Omite \"French gold\" y es ambigua sobre si son 2,000 por caja o en total (el texto dice que esa caja contiene 2,000 de los 30,000)."
+      },
+      "correction_reason": "v1 accepted the quantity against a reference (\"2,000 in each crate\") that the story does not support."
+    },
+    {
+      "id": "RH06",
+      "type": "unanswerable",
+      "engine": "z",
+      "context_usefulness": "insuficiente (esperado: pregunta sin respuesta)",
+      "correctness": "abstención (apropiada)",
+      "support": "parcial",
+      "justification": "Termina con \"the name of the girl … is not explicitly mentioned\", que es correcto: el contexto no la menciona. Pero antes cita dos frases irrelevantes, una alterada (\"one of the most singular that I have ever listened to\" frente a \"one of the most singular which I have listened to for some time\").",
+      "question": "What was the name of the girl who cooked for Jabez Wilson?",
+      "answer": "The passage mentions that \"Jabez Wilson here has been good enough to call upon me this morning, and to begin a narrative which promises to be one of the most singular that I have ever listened to.\" The narrator states, \"As a rule, when I have heard some slight indication of the course of events, I am able to guide myself by the thousands of other similar cases which occur to my memory.\" Therefore, the name of the girl who cooked for Jabez Wilson is not explicitly mentioned in the passage provided.",
+      "context_chunk_ids": [
+        "red_headed_league_005",
+        "red_headed_league_008",
+        "red_headed_league_003",
+        "red_headed_league_009"
+      ],
+      "expected_answer": null,
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB01",
+      "type": "direct",
+      "engine": "approximate",
+      "context_usefulness": "suficiente",
+      "correctness": "parcial",
+      "support": "parcial",
+      "justification": "speckled_band_016 está en el contexto. \"Oh, my God!\" es parte del grito, pero falta lo esencial (\"the speckled band\"). \"Whispered\" contradice \"shrieked\"; el ruido metálico (speckled_band_023) lo oyó Helen y no se relaciona con esas palabras: es un detalle sin respaldo.",
+      "question": "What were the last words of Helen Stoner's sister?",
+      "answer": "Helen Stoner's sister whispered \"Oh, my God!\" after being struck by a metallic clang.",
+      "context_chunk_ids": [
+        "speckled_band_023",
+        "speckled_band_007",
+        "speckled_band_016",
+        "speckled_band_030"
+      ],
+      "expected_answer": "\"It was the band! The speckled band!\"",
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB02",
+      "type": "direct",
+      "engine": "approximate",
+      "context_usefulness": "suficiente",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "speckled_band_035 dice \"into another room\". En speckled_band_051 lo que cuelga hasta la cama es el cordón de la campana; Watson los confunde.",
+      "question": "Where did the ventilator in Helen Stoner's room lead?",
+      "answer": "The ventilator led to the bed.",
+      "context_chunk_ids": [
+        "speckled_band_053",
+        "speckled_band_035",
+        "speckled_band_051",
+        "speckled_band_013"
+      ],
+      "expected_answer": "Into another room (Dr. Roylott's), not to the outside air.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB03",
+      "type": "direct",
+      "engine": "approximate",
+      "context_usefulness": "insuficiente",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "speckled_band_036 (el plato de leche) no llegó. En speckled_band_048 la linterna está \"on the table\" y no encima de la caja fuerte.",
+      "question": "What did Holmes find on top of the iron safe in Dr. Roylott's room?",
+      "answer": "Holmes found a dark lantern with a shutter half open on top of the iron safe in Dr. Roylott's room.",
+      "context_chunk_ids": [
+        "speckled_band_048",
+        "speckled_band_030",
+        "speckled_band_002",
+        "speckled_band_050"
+      ],
+      "expected_answer": "A small saucer of milk.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB04",
+      "type": "paraphrase",
+      "engine": "approximate",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "speckled_band_042: \"It was clamped to the floor\".",
+      "question": "Why could Helen Stoner not move her bed?",
+      "answer": "Helen Stoner could not move her bed because it was clamped to the floor.",
+      "context_chunk_ids": [
+        "speckled_band_042",
+        "speckled_band_032",
+        "speckled_band_033",
+        "speckled_band_045"
+      ],
+      "expected_answer": "It was clamped to the floor.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB05",
+      "type": "misspelled",
+      "engine": "approximate",
+      "context_usefulness": "insuficiente",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "Levenshtein corrigió bien la pregunta (animals, roylott), pero ningún fragmento con los animales llegó. El ventilador de speckled_band_041 está en el cuarto de Helen y no es algo que Roylott \"tuviera\"; \"unusual and potentially significant\" mezcla comentarios de Holmes.",
+      "question": "What animls did Dr. Roylot keep at Stoke Moran?",
+      "answer": "Dr. Roylot kept a small ventilation system in Stoke Moran, which he believed was unusual and potentially significant.",
+      "context_chunk_ids": [
+        "speckled_band_041",
+        "speckled_band_009",
+        "speckled_band_025",
+        "speckled_band_029"
+      ],
+      "expected_answer": "A cheetah and a baboon (he had a passion for Indian animals).",
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB06",
+      "type": "misspelled",
+      "engine": "approximate",
+      "context_usefulness": "suficiente",
+      "correctness": "parcial",
+      "support": "parcial",
+      "justification": "speckled_band_049: \"swamp adder … the deadliest snake in India\". \"A deadly snake\" es correcto en lo esencial pero no la identifica como víbora de los pantanos. \"The cause of Helen's death\" no tiene respaldo: Helen no murió, murió su hermana.",
+      "question": "What was the speckld band realy?",
+      "answer": "The speckled band was a deadly snake believed to be the cause of Helen's death.",
+      "context_chunk_ids": [
+        "speckled_band_049",
+        "speckled_band_018",
+        "speckled_band_016",
+        "speckled_band_001"
+      ],
+      "expected_answer": "A swamp adder, the deadliest snake in India.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "SB07",
+      "type": "unanswerable",
+      "engine": "approximate",
+      "context_usefulness": "insuficiente (esperado: pregunta sin respuesta)",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "Inventa \"black\". Además, Levenshtein cambió \"curtains\" por \"certain\" en la búsqueda, aunque eso no habría permitido encontrar una respuesta que no existe.",
+      "question": "What colour were the curtains in Helen Stoner's bedroom?",
+      "answer": "The curtains in Helen Stoner's bedroom were black.",
+      "context_chunk_ids": [
+        "speckled_band_009",
+        "speckled_band_007",
+        "speckled_band_023",
+        "speckled_band_013"
+      ],
+      "expected_answer": null,
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC01",
+      "type": "direct",
+      "engine": "approximate",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "blue_carbuncle_004 y 003, igual que con KMP.",
+      "question": "Who picked up the hat and the goose after the fight on Tottenham Court Road?",
+      "answer": "Peterson picked up the hat and the goose after the fight on Tottenham Court Road.",
+      "context_chunk_ids": [
+        "blue_carbuncle_004",
+        "blue_carbuncle_003",
+        "blue_carbuncle_015",
+        "blue_carbuncle_016"
+      ],
+      "expected_answer": "Peterson, the commissionaire.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC02",
+      "type": "direct",
+      "engine": "approximate",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "blue_carbuncle_006 y 005: las iniciales \"H. B.\".",
+      "question": "What initials were written inside the hat?",
+      "answer": "The initials \"H. B.\" were written inside the hat.",
+      "context_chunk_ids": [
+        "blue_carbuncle_010",
+        "blue_carbuncle_005",
+        "blue_carbuncle_006",
+        "blue_carbuncle_008"
+      ],
+      "expected_answer": "H. B. (the card on the goose read 'For Mrs. Henry Baker').",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC03",
+      "type": "direct",
+      "engine": "approximate",
+      "context_usefulness": "suficiente",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "Mismo contexto que KMP, con blue_carbuncle_012 (\"found in its crop\"). Repite el error del estuche de joyas.",
+      "question": "Where did Peterson's wife find the blue stone?",
+      "answer": "Peterson's wife found the blue stone in the Countess of Morcar's jewel-case.",
+      "context_chunk_ids": [
+        "blue_carbuncle_012",
+        "blue_carbuncle_017",
+        "blue_carbuncle_014",
+        "blue_carbuncle_035"
+      ],
+      "expected_answer": "In the crop of the goose.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC04",
+      "type": "direct",
+      "engine": "approximate",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "blue_carbuncle_014. Levenshtein cambió \"stealing\" por \"staring\", pero el fragmento correcto llegó igual.",
+      "question": "Who was accused of stealing the Countess of Morcar's jewel?",
+      "answer": "John Horner was accused of stealing the Countess of Morcar's jewel.",
+      "context_chunk_ids": [
+        "blue_carbuncle_014",
+        "blue_carbuncle_035",
+        "blue_carbuncle_013",
+        "blue_carbuncle_012"
+      ],
+      "expected_answer": "John Horner, a plumber.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC05",
+      "type": "misspelled",
+      "engine": "approximate",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "blue_carbuncle_024: \"I got the two dozen from a salesman in Covent Garden\" … \"Breckinridge is his name\". Con el mismo fragmento disponible, aquí sí da el nombre.",
+      "question": "Wich dealer in Covent Gardn sold the geese to the Alpha Inn?",
+      "answer": "The dealer in Covent Garden who sold the geese to the Alpha Inn was Breckinridge.",
+      "context_chunk_ids": [
+        "blue_carbuncle_024",
+        "blue_carbuncle_041",
+        "blue_carbuncle_025",
+        "blue_carbuncle_026"
+      ],
+      "expected_answer": "Breckinridge.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC06",
+      "type": "misspelled",
+      "engine": "approximate",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "blue_carbuncle_032: alias John Robinson, nombre real James Ryder.",
+      "question": "What was the real name of the man who called himself John Robinsn?",
+      "answer": "The real name of the man who called himself John Robinson was James Ryder.",
+      "context_chunk_ids": [
+        "blue_carbuncle_032",
+        "blue_carbuncle_012",
+        "blue_carbuncle_016",
+        "blue_carbuncle_014"
+      ],
+      "expected_answer": "James Ryder.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "BC07",
+      "type": "unanswerable",
+      "engine": "approximate",
+      "context_usefulness": "insuficiente (esperado: pregunta sin respuesta)",
+      "correctness": "incorrecta",
+      "support": "sin respaldo",
+      "justification": "Inventa \"black\"; \"carriage\" no aparece en el contexto.",
+      "question": "What colour was the Countess of Morcar's carriage?",
+      "answer": "The Countess of Morcar's carriage was black.",
+      "context_chunk_ids": [
+        "blue_carbuncle_035",
+        "blue_carbuncle_012",
+        "blue_carbuncle_014",
+        "blue_carbuncle_018"
+      ],
+      "expected_answer": null,
+      "changed_in_v2": false
+    },
+    {
+      "id": "RH01",
+      "type": "direct",
+      "engine": "approximate",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "red_headed_league_007: \"a salary of £ 4 a week\".",
+      "question": "How much was Jabez Wilson paid each week by the Red-Headed League?",
+      "answer": "Jabez Wilson was paid £4 a week by the Red-Headed League.",
+      "context_chunk_ids": [
+        "red_headed_league_007",
+        "red_headed_league_001",
+        "red_headed_league_029",
+        "red_headed_league_024"
+      ],
+      "expected_answer": "Four pounds (£4) a week.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "RH02",
+      "type": "direct",
+      "engine": "approximate",
+      "context_usefulness": "suficiente",
+      "correctness": "parcial",
+      "support": "parcial",
+      "justification": "Mismos fragmentos que KMP (042, 048, 045, 047). red_headed_league_045 muestra a John Clay detenido; la respuesta habla del \"assistant\" (correcto según el relato) sin dar el nombre disponible.",
+      "question": "Who was caught in the bank cellar at the end of the case?",
+      "answer": "At the end of the case, the assistant was caught in the bank cellar.",
+      "context_chunk_ids": [
+        "red_headed_league_042",
+        "red_headed_league_048",
+        "red_headed_league_045",
+        "red_headed_league_047"
+      ],
+      "expected_answer": "John Clay.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "RH03",
+      "type": "paraphrase",
+      "engine": "approximate",
+      "context_usefulness": "insuficiente",
+      "correctness": "incorrecta",
+      "support": "parcial",
+      "justification": "red_headed_league_046 no llegó. Que pertenecía a la Liga sí está en el contexto. \"A secret society that operated under the guise of a charitable organization\" no aparece y es inventado.",
+      "question": "Why was Jabez Wilson paid to copy the Encyclopaedia?",
+      "answer": "Jabez Wilson was paid to copy the Encyclopædia Britannica because he was part of the Red-Headed League, which was a secret society that operated under the guise of a charitable organization.",
+      "context_chunk_ids": [
+        "red_headed_league_019",
+        "red_headed_league_006",
+        "red_headed_league_049",
+        "red_headed_league_024"
+      ],
+      "expected_answer": "To get him out of the way for a number of hours every day.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "RH04",
+      "type": "misspelled",
+      "engine": "approximate",
+      "context_usefulness": "suficiente",
+      "correctness": "correcta",
+      "support": "completo",
+      "justification": "Levenshtein corrigió \"pavment\" y \"stik\", y llegó red_headed_league_048: \"I was ascertaining whether the cellar stretched out in front or behind\". La respuesta lo reproduce.",
+      "question": "Why did Holmes beat the pavment with his stik?",
+      "answer": "Holmes beat the pavement with his stick because he wanted to ascertain whether the cellar stretched out in front or behind.",
+      "context_chunk_ids": [
+        "red_headed_league_029",
+        "red_headed_league_048",
+        "red_headed_league_030",
+        "red_headed_league_038"
+      ],
+      "expected_answer": "To find out whether the cellar stretched out in front or behind.",
+      "changed_in_v2": false
+    },
+    {
+      "id": "RH05",
+      "type": "direct",
+      "engine": "approximate",
+      "context_usefulness": "suficiente",
+      "correctness": "parcial",
+      "support": "parcial",
+      "justification": "red_headed_league_040 supports napoleons packed between layers of lead foil and \"Your French gold?\". \"The crates contained 2,000 napoleons\" generalizes the quantity of one crate to the crates (the text gives 2,000 for one crate and 30,000 in total), and the answer omits that it is French gold.",
+      "question": "What was stored in the crates in the bank cellar?",
+      "answer": "In the bank cellar, the crates contained 2,000 Napoleons packed between layers of lead foil.",
+      "context_chunk_ids": [
+        "red_headed_league_048",
+        "red_headed_league_040",
+        "red_headed_league_045",
+        "red_headed_league_038"
+      ],
+      "expected_answer": "French gold: napoleons packed between layers of lead foil. The crate Merryweather sits on contains 2,000 napoleons; 30,000 were borrowed in total.",
+      "changed_in_v2": true,
+      "v1": {
+        "context_usefulness": "suficiente",
+        "correctness": "correcta",
+        "support": "completo",
+        "justification": "red_headed_league_040, igual que con KMP: napoleones en láminas de plomo. Omite \"French gold\" y es ambigua sobre la cantidad por caja. Levenshtein cambió \"stored\" por \"storied\" sin impedir la recuperación."
+      },
+      "correction_reason": "v1 accepted the quantity against a reference (\"2,000 in each crate\") that the story does not support."
+    },
+    {
+      "id": "RH06",
+      "type": "unanswerable",
+      "engine": "approximate",
+      "context_usefulness": "insuficiente (esperado: pregunta sin respuesta)",
+      "correctness": "abstención (no válida)",
+      "support": "completo",
+      "justification": "\"The passage does not mention a girl named Cook\" is true for the context (no girl appears in it) and invents nothing, but it reads \"cooked\" as the name \"Cook\" and denies something the question did not ask. It does not say that the girl's name is unknown, so it is not a valid abstention on the question asked, although abstaining would have been appropriate.",
+      "question": "What was the name of the girl who cooked for Jabez Wilson?",
+      "answer": "The passage does not mention a girl named Cook for Jabez Wilson.",
+      "context_chunk_ids": [
+        "red_headed_league_005",
+        "red_headed_league_016",
+        "red_headed_league_024",
+        "red_headed_league_003"
+      ],
+      "expected_answer": null,
+      "changed_in_v2": true,
+      "v1": {
+        "context_usefulness": "insuficiente (esperado: pregunta sin respuesta)",
+        "correctness": "abstención (apropiada)",
+        "support": "completo",
+        "justification": "\"The passage does not mention a girl …\" es una abstención aunque no use la frase exacta, y es apropiada: \"girl\" no aparece en el contexto. Malinterpreta la pregunta como \"a girl named Cook\"; Levenshtein también cambió \"cooked\" por \"cocked\" en la búsqueda."
+      },
+      "correction_reason": "v1 counted a misread question as an appropriate abstention."
+    }
+  ]
+}

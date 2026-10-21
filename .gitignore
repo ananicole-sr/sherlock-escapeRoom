@@ -1,4 +1,14 @@
+# Entorno y archivos temporales
+.venv/
 __pycache__/
 *.pyc
-.venv/
+.env
+
 /background
+
+# Documentos específicos que no quiero subir
+/reports/reporte_etapas_5_6.docx
+/reports/reporte_etapas_5_6.pdf
+/reports/reporte_etapas_5_6.md
+/reports/reporte_etapas_5_6.docx
+/reports/reporte_etapas_5_6.pdf
