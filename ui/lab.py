@@ -1,8 +1,8 @@
 
 # -------------------------------------------------------------------------
 # Research Lab: technical view of retrieval and generation.
-# Only real measurements are shown. Exact search (KMP / Z-function) is
-# listed automatically once exact_search.py with search_exact() exists.
+# Only real measurements are shown. Exact search (KMP / Z-function) comes
+# from exact_search.py (stage 3) and is listed when that module exists.
 # -------------------------------------------------------------------------
 
 import html
@@ -26,15 +26,30 @@ def esc(text):
 
 def exact_engine():
     """
-        Returns search_exact(question, chunks, algorithm, top_k, story) from
-        exact_search.py (stage 3), or None while that module is not merged.
+        Returns exact_search(query, algorithm, top_k, story) from
+        exact_search.py (stage 3), or None if the module is missing.
     """
     try:
         import exact_search
     except ImportError:
         return None
 
-    return getattr(exact_search, "search_exact", None)
+    return getattr(exact_search, "exact_search", None)
+
+
+def format_score(score):
+    if isinstance(score, int):
+        return str(score)
+
+    return f"{score:.4f}"
+
+
+def matched_text(matched):
+    # Exact search reports {term: frequency}; approximate search, a list.
+    if isinstance(matched, dict):
+        return ", ".join(f"{term} ×{count}" for term, count in matched.items())
+
+    return ", ".join(matched)
 
 
 def run_search(engine, query, collection, top_k, story, method, ngram_size):
@@ -48,7 +63,12 @@ def run_search(engine, query, collection, top_k, story, method, ngram_size):
 
     algorithm = "kmp" if engine == EXACT_KMP else "z"
 
-    return exact_engine()(query, chunks, algorithm, top_k, story)
+    response = exact_engine()(query, algorithm=algorithm, top_k=top_k, story=story)
+
+    # Same names as the approximate engine, so the view below is shared.
+    response.setdefault("query_terms", response.get("keywords", []))
+
+    return response
 
 
 def draw_controls(collection):
@@ -79,9 +99,9 @@ def draw_controls(collection):
 
     if exact_engine() is None:
         st.caption(
-            "Exact search (KMP and Z-function, stage 3) is not in the repository yet. "
-            "It will appear here automatically when exact_search.py provides "
-            "search_exact(question, chunks, algorithm, top_k, story)."
+            "Exact search (KMP and Z-function, stage 3) is not available: "
+            "exact_search.py with exact_search(query, algorithm, top_k, story) "
+            "was not found."
         )
 
     if st.button("Run search", type="primary", key="lab_run"):
@@ -110,6 +130,12 @@ def draw_results(response):
     b.metric("Retrieval time", f"{response['retrieval_time_ms']:.2f} ms")
     c.metric("Chunks examined", response.get("chunks_examined", "—"))
     d.metric("Results", len(results))
+
+    if "chunks_recovered" in response:
+        st.caption(
+            f"Fragments with at least one exact match: {response['chunks_recovered']} · "
+            "candidates taken from the inverted index"
+        )
 
     if "correction_time_ms" in response:
         st.caption(
@@ -142,13 +168,13 @@ def draw_results(response):
     for rank, result in enumerate(results, start=1):
         width = max(2, int(100 * result["score"] / best))
         matched = result.get("matched_terms", [])
-        matched_html = f" · matched: {esc(', '.join(matched))}" if matched else ""
+        matched_html = f" · matched: {esc(matched_text(matched))}" if matched else ""
 
         st.markdown(
             f"<div class='result'><div class='top'><span><span class='rank'>{rank}</span>"
             f"<span class='id'>{esc(result['chunk_id'])}</span> "
             f"<span class='story'>· {esc(result['story'])}</span></span>"
-            f"<span class='score'>score {result['score']:.4f}{matched_html}</span></div>"
+            f"<span class='score'>score {format_score(result['score'])}{matched_html}</span></div>"
             f"<div class='bar' role='img' aria-label='Relative score {width}%'><i style='width:{width}%'></i></div>"
             f"<div class='excerpt'>{esc(result['text'][:280])}…</div></div>",
             unsafe_allow_html=True

@@ -127,8 +127,6 @@ def draw_scene(case, cases):
 
 def draw_deduction_bar(case, cases):
     with st.container(key="deduce"):
-        copy, action = st.columns([2.2, 1], vertical_alignment="center")
-
         recorded = len(state.recorded_in(case["id"]))
 
         if state.is_solved(case):
@@ -141,14 +139,14 @@ def draw_deduction_bar(case, cases):
                     "When the evidence points one way, name it.")
             label = "Present your deduction"
 
-        copy.markdown(
+        st.markdown(
             f"<div class='deduce-copy'><div class='title'>{title}</div>"
             f"<div class='body'>{body}</div></div>",
             unsafe_allow_html=True
         )
 
-        if action.button(label, key=f"deduce_{case['id']}", type="primary",
-                         use_container_width=True):
+        if st.button(label, key=f"deduce_{case['id']}", type="primary",
+                     use_container_width=True):
             deduction_dialog(case, cases)
 
 
@@ -405,7 +403,8 @@ def watson_panel(case, collection):
             remembered = {"prefix": "", "words": []}
             st.session_state.ask_suggestions[case_id] = remembered
 
-    log = st.container(height=400, key=CHAT_LOG_KEY, border=False)
+    # Short enough that the deduction card below still fits on screen.
+    log = st.container(height=260, key=CHAT_LOG_KEY, border=False)
     ask_area = st.container()
 
     with ask_area:
@@ -515,11 +514,12 @@ def draw_investigation(cases, collection):
 
     draw_case_header(case, cases)
 
-    scene_column, side_column = st.columns([1.7, 1], gap="large")
+    # Scene on the left; Watson, the notebook and the deduction on the
+    # right. On phones the columns stack in that same order.
+    scene_column, side_column = st.columns([65, 35], gap="medium")
 
     with scene_column:
         draw_scene(case, cases)
-        draw_deduction_bar(case, cases)
 
     with side_column:
         with st.container(key="panel"):
@@ -530,3 +530,5 @@ def draw_investigation(cases, collection):
 
             with notebook_tab:
                 draw_notebook(case, cases)
+
+        draw_deduction_bar(case, cases)

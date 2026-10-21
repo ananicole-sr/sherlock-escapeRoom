@@ -69,8 +69,8 @@ html, body, .stApp, [class*="css"] {
 [data-testid="stSidebarCollapsedControl"] { display: none !important; }
 
 [data-testid="stMainBlockContainer"], .block-container {
-    max-width: 1480px;
-    padding: 18px 32px 48px !important;
+    max-width: 1840px;
+    padding: 16px 20px 40px !important;
 }
 
 @media (max-width: 640px) {
@@ -275,15 +275,39 @@ div[role="dialog"] h2 { font-size: 30px !important; }
 /* ---------- deduction bar ---------- */
 
 .st-key-deduce {
-    margin-top: 6px;
-    padding: 14px 16px;
+    margin-top: 4px;
+    padding: 12px 14px;
+    gap: 10px !important;
     border-radius: 12px;
     border: 1px solid var(--line);
     background:
         linear-gradient(90deg, rgba(59, 42, 28, 0.55), rgba(18, 25, 37, 0.6));
 }
-.deduce-copy .title { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--text); line-height: 1.2; }
-.deduce-copy .body { font-size: 13.5px; color: var(--text-2); }
+.deduce-copy .title { font-family: var(--serif); font-size: 21px; font-weight: 700; color: var(--text); line-height: 1.2; }
+.deduce-copy { padding-bottom: 10px; }
+.deduce-copy .body { margin-top: 2px; font-size: 13.5px; line-height: 1.45; color: var(--text-2); }
+
+/* ---------- scene and side columns ---------- */
+
+/* The scene column is exactly as wide as the scene, which shrinks to fit
+   the window height (same formula as fitToWindow in components/scene:
+   330 px reserved, image ratio 1672/941, at least 480 px). The space left
+   over goes to Watson, so the gap between both columns stays at 28 px. */
+@media (min-width: 641px) {
+    [data-testid="stHorizontalBlock"]:has(.st-key-panel) {
+        gap: 28px !important;
+    }
+    [data-testid="stHorizontalBlock"]:has(.st-key-panel) > [data-testid="stColumn"]:first-child {
+        flex: 0 1 min(calc(65% - 14px), max(480px, calc((100vh - 330px) * 1.7768))) !important;
+        width: auto !important;
+        min-width: 0 !important;
+    }
+    [data-testid="stHorizontalBlock"]:has(.st-key-panel) > [data-testid="stColumn"]:last-child {
+        flex: 1 1 0 !important;
+        width: auto !important;
+        min-width: 0 !important;
+    }
+}
 
 /* ---------- side panel ---------- */
 
