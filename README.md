@@ -29,23 +29,34 @@ después de editar el código hay que reiniciar `streamlit run app.py`.
 
 ## Organización
 
-| Archivo | Qué hace |
-|---|---|
-| `app.py` | Entrada: tema, estado y navegación entre pantallas |
-| `ui/state.py` | Estado del juego en `st.session_state` y validación de respuestas |
-| `ui/investigation.py` | Expediente: escenario, Watson, cuaderno y deducción |
-| `ui/lab.py` | Research Lab |
-| `ui/screens.py` | Portada y conclusión |
-| `ui/theme.py` | Estilos (paleta victoriana) |
-| `ui/widgets.py` | Envoltorios de los componentes personalizados |
-| `components/scene/` | Escenario con objetos clicables (HTML + JS, sin build) |
-| `components/ask/` | Campo de preguntas con autocompletado del Trie |
-| `data/cases.json` | Casos: textos, acertijos, respuestas y objetos con coordenadas |
-| `static/scenes/` | Imágenes de los escenarios (servidas en `app/static/`) |
-| `watson.py` | Selección de contexto, prompt y generación con Hugging Face |
-| `trie.py`, `autocomplete.py` | Trie y sugerencias |
-| `approximate_search.py`, `levenshtein.py`, `jaccard.py` | Búsqueda aproximada |
-| `chunking.py`, `preprocess_chunks.py`, `inverted_index.py`, `text_cleaner.py` | Preparación de documentos e índice |
+```text
+sherlock-escapeRoom/
+├── app.py                 entrada de la aplicación (Streamlit)
+├── requirements.txt
+├── search/                etapas 1 a 4: documentos, índice y algoritmos
+│   ├── chunking.py            divide los relatos en fragmentos
+│   ├── text_cleaner.py        normalización y tokenización
+│   ├── preprocess_chunks.py   texto normalizado y tokens de cada fragmento
+│   ├── inverted_index.py      índice invertido y vocabulario
+│   ├── query_processing.py    preprocesamiento común de las preguntas
+│   ├── kmp.py · z_function.py · exact_search.py          búsqueda exacta
+│   ├── levenshtein.py · jaccard.py · approximate_search.py   búsqueda aproximada
+│   └── trie.py · autocomplete.py                          autocompletado
+├── assistant/
+│   └── watson.py          etapa 5: selección del contexto y modelo de lenguaje
+├── ui/                    pantallas de la app y componentes (ui/components/)
+├── static/                imágenes que sirve la app (escenarios, portada, Watson)
+├── data/                  datos de producción: relatos, fragmentos, índice,
+│                          vocabulario y casos del juego (cases.json)
+├── evaluation/            etapa 6: scripts de evaluación, experimentos y gráficas
+├── tests/                 pruebas
+└── reports/               todo lo relacionado con reportes
+    ├── reporte_etapas_5_6.md / .docx / .pdf    documento de las etapas 5 y 6
+    ├── figures/           gráficas de la etapa 6 y sus números
+    ├── results/           resultados de la evaluación y del experimento de tamaño
+    ├── review/            evaluación asistida por IA (v1, v2 y correcciones)
+    └── archive/           resultados intermedios (pruebas iniciales y diagnóstico de Watson)
+```
 
 ## Agregar o mover objetos en un escenario
 
@@ -57,27 +68,38 @@ porcentajes de la imagen (0–100), así que siguen alineados al cambiar el tama
 Después de editar, verifica que las citas existan en los textos:
 
 ```bash
-python test_case_content.py
+python -m tests.test_case_content
 ```
 
-## Búsqueda exacta (etapa 3)
+## Comandos
 
-El Research Lab muestra KMP y Z-function en cuanto exista `exact_search.py` con:
+Todos se corren desde la carpeta del proyecto (la que contiene `app.py`).
 
-```python
-search_exact(question, chunks, algorithm, top_k, story)   # algorithm: "kmp" o "z"
-```
-
-que devuelva el mismo formato que `search_approximate` (`query`, `algorithm`,
-`retrieval_time_ms`, `chunks_examined`, `results` con `chunk_id`, `story`,
-`text` y `score`).
-
-## Pruebas
+**Regenerar los datos de los documentos** (solo si cambian los relatos o la normalización):
 
 ```bash
-python test_trie.py
-python test_case_content.py
-python test_approximate_search.py
-python test_watson_models.py qwen      # 4 preguntas de prueba, guarda data/watson_trial_qwen.json
-python test_watson_models.py flan-t5   # lo mismo con FLAN-T5
+python -m search.chunking            # data/chunks.json
+python -m search.preprocess_chunks   # data/processed_chunks.json
+python -m search.inverted_index      # data/inverted_index.json y data/vocabulary.json
+```
+
+**Pruebas:**
+
+```bash
+python -m tests.test_search_metrics      # KMP = Z, métricas de los buscadores
+python -m tests.test_trie
+python -m tests.test_case_content
+python -m tests.test_approximate_search
+```
+
+**Evaluación de la etapa 6** (ya está hecha; los resultados están en `reports/`):
+
+```bash
+python -m evaluation.build_evaluation_questions   # verifica las 20 preguntas
+python -m evaluation.run_evaluation               # 60 ejecuciones con Qwen (no sobrescribe resultados)
+python -m evaluation.run_scaling_experiment       # colecciones de 1, 2 y 3 relatos
+python -m evaluation.build_review_v2              # revisión asistida por IA, versión 2
+python -m evaluation.make_stage6_figures          # reports/figures/
+python -m evaluation.watson_trial qwen            # prueba rápida de Watson (4 preguntas)
+python -m evaluation.diagnose_watson              # diagnóstico de Watson
 ```

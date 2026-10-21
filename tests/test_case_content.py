@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 CASES_FILE = BASE_DIR / "data" / "cases.json"
 
 STORY_FILES = {

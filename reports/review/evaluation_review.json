@@ -2,15 +2,15 @@
   "status": "Preliminary AI assessment, pending human review. Not a human evaluation.",
   "version": 2,
   "sources": {
-    "version_1": "reports/evaluation_review.md",
-    "corrections": "reports/evaluation_review_corrections.md",
-    "answers_and_contexts": "data/evaluation_results.json (unchanged)"
+    "version_1": "reports/review/evaluation_review.md",
+    "corrections": "reports/review/evaluation_review_corrections.md",
+    "answers_and_contexts": "reports/results/evaluation_results.json (unchanged)"
   },
   "corrected_references": {
     "RH05": {
       "v1_expected_answer": "French gold: napoleons, 2,000 in each crate, packed between layers of lead foil.",
       "v2_expected_answer": "French gold: napoleons packed between layers of lead foil. The crate Merryweather sits on contains 2,000 napoleons; 30,000 were borrowed in total.",
-      "reason": "The story gives the quantity for one crate only (\"The crate upon which I sit contains 2,000 napoleons\") and the total borrowed (\"30,000 napoleons from the Bank of France\"); it never says \"each crate\". data/evaluation_questions.json is left unchanged; this is the corrected reference used in version 2."
+      "reason": "The story gives the quantity for one crate only (\"The crate upon which I sit contains 2,000 napoleons\") and the total borrowed (\"30,000 napoleons from the Bank of France\"); it never says \"each crate\". reports/results/evaluation_questions.json is left unchanged; this is the corrected reference used in version 2."
     }
   },
   "corrections": [

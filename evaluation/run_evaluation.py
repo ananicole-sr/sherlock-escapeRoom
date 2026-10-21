@@ -4,16 +4,16 @@ import re
 import time
 from pathlib import Path
 
-import watson
-from approximate_search import load_collection, search_approximate
-from exact_search import exact_search
-from test_watson_models import memory_mb
-from text_cleaner import normalize_text
+from assistant import watson
+from search.approximate_search import load_collection, search_approximate
+from search.exact_search import exact_search
+from evaluation.watson_trial import memory_mb
+from search.text_cleaner import normalize_text
 
-BASE_DIR = Path(__file__).resolve().parent
-QUESTIONS_FILE = BASE_DIR / "data" / "evaluation_questions.json"
-RESULTS_FILE = BASE_DIR / "data" / "evaluation_results.json"
-REVIEW_FILE = BASE_DIR / "data" / "evaluation_review.csv"
+BASE_DIR = Path(__file__).resolve().parent.parent
+QUESTIONS_FILE = BASE_DIR / "reports" / "results" / "evaluation_questions.json"
+RESULTS_FILE = BASE_DIR / "reports" / "results" / "evaluation_results.json"
+REVIEW_FILE = BASE_DIR / "reports" / "results" / "evaluation_review.csv"
 
 TOP_K = 5
 WARMUP_RUNS = 1

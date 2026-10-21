@@ -2,13 +2,13 @@ import json
 import time
 from pathlib import Path
 
-import watson
-from approximate_search import load_collection, search_approximate
-from test_watson_models import TRIAL_QUESTIONS, memory_mb
-from text_cleaner import tokenize
+from assistant import watson
+from search.approximate_search import load_collection, search_approximate
+from evaluation.watson_trial import TRIAL_QUESTIONS, memory_mb
+from search.text_cleaner import tokenize
 
-BASE_DIR = Path(__file__).resolve().parent
-OUTPUT = BASE_DIR / "data" / "watson_diagnostic_qwen.json"
+BASE_DIR = Path(__file__).resolve().parent.parent
+OUTPUT = BASE_DIR / "reports" / "archive" / "watson_diagnostic_qwen.json"
 
 # Evidence verified by hand in data/*.txt: the chunk that answers each
 # question, phrases that must reach the model, and words that a correct
@@ -245,7 +245,7 @@ def main():
     print(f"\nSaved to: {output}")
 
 
-FOLLOWUP_OUTPUT = BASE_DIR / "data" / "watson_diagnostic_qwen_followup.json"
+FOLLOWUP_OUTPUT = BASE_DIR / "reports" / "archive" / "watson_diagnostic_qwen_followup.json"
 
 
 def followup():

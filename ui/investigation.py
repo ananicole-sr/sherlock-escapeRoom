@@ -8,9 +8,9 @@ import html
 
 import streamlit as st
 
-import watson
-from approximate_search import search_approximate
-from autocomplete import suggest, last_word
+from assistant import watson
+from search.approximate_search import search_approximate
+from search.autocomplete import suggest, last_word
 from ui import state
 from ui.state import ROMAN
 from ui.widgets import scene_view, ask_box, watson_avatar

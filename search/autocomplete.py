@@ -15,9 +15,9 @@
 import json
 from pathlib import Path
 
-from trie import Trie
+from search.trie import Trie
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 VOCABULARY_FILE = BASE_DIR / "data" / "vocabulary.json"
 INVERTED_INDEX_FILE = BASE_DIR / "data" / "inverted_index.json"
 

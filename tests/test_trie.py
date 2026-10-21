@@ -2,11 +2,11 @@ import json
 import time
 from pathlib import Path
 
-from trie import Trie
-from autocomplete import load_vocabulary, load_document_frequency, build_trie
+from search.trie import Trie
+from search.autocomplete import load_vocabulary, load_document_frequency, build_trie
 
-BASE_DIR = Path(__file__).resolve().parent
-RESULTS_FILE = BASE_DIR / "data" / "trie_results.json"
+BASE_DIR = Path(__file__).resolve().parent.parent
+RESULTS_FILE = BASE_DIR / "reports" / "results" / "trie_results.json"
 
 TEST_PREFIXES = ["bel", "ven", "goo", "tun", "car", "sher", "ro", "sp", "wh", "zzz"]
 REPETITIONS = 200

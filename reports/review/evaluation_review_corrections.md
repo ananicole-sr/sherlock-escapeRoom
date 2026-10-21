@@ -1,10 +1,10 @@
 # Correcciones a la revisión de la evaluación (versión 2)
 
 > **Valoraciones preliminares hechas por IA, pendientes de revisión humana.**
-> La versión 1 (`reports/evaluation_review.md`) se conserva sin cambios. La versión 2
-> (`reports/evaluation_review.json`, generada con `build_review_v2.py`) aplica las correcciones
+> La versión 1 (`reports/review/evaluation_review.md`) se conserva sin cambios. La versión 2
+> (`reports/review/evaluation_review.json`, generada con `evaluation/build_review_v2.py`) aplica las correcciones
 > de este documento. Las respuestas reales y los contextos registrados en
-> `data/evaluation_results.json` no se modificaron, y tampoco `data/evaluation_questions.json`.
+> `reports/results/evaluation_results.json` no se modificaron, y tampoco `reports/results/evaluation_questions.json`.
 
 ## 1. SB02 con KMP y Z-function: respuesta incompleta, no sin respaldo
 
@@ -36,8 +36,8 @@
 - **Motivo:** la respuesta identifica bien el contenido (napoleones entre láminas de plomo), pero atribuye a
   "the crates" la cantidad de una sola caja, lo que contradice el total de 30,000, y omite que es oro
   francés. La versión 1 la aceptó porque la referencia tenía la misma generalización.
-- `data/evaluation_questions.json` conserva la referencia original, porque es la que se usó en las 60
-  ejecuciones. La referencia corregida está en `reports/evaluation_review.json` (`corrected_references`).
+- `reports/results/evaluation_questions.json` conserva la referencia original, porque es la que se usó en las 60
+  ejecuciones. La referencia corregida está en `reports/review/evaluation_review.json` (`corrected_references`).
 
 ## 3. RH06 con búsqueda aproximada: no es una abstención válida
 

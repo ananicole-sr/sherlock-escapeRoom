@@ -29,8 +29,8 @@ import re
 import threading
 import time
 
-from query_processing import extract_query_terms
-from text_cleaner import tokenize
+from search.query_processing import extract_query_terms
+from search.text_cleaner import tokenize
 
 MODELS = {
     "qwen": {
@@ -588,7 +588,7 @@ def answer_question(question, search_response):
 
 
 def main():
-    from approximate_search import load_collection, search_approximate
+    from search.approximate_search import load_collection, search_approximate
 
     chunks, vocabulary, document_frequency = load_collection()
 

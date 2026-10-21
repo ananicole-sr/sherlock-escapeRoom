@@ -16,9 +16,9 @@ from pathlib import Path
 
 import streamlit as st
 
-import watson
-from approximate_search import load_collection
-from autocomplete import get_trie
+from assistant import watson
+from search.approximate_search import load_collection
+from search.autocomplete import get_trie
 from ui import state
 from ui.investigation import draw_investigation
 from ui.lab import draw_research_lab

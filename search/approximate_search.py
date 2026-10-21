@@ -3,14 +3,14 @@ import json
 import time
 from pathlib import Path
 
-from levenshtein import closest_word
-from jaccard import char_ngrams, jaccard_similarity
+from search.levenshtein import closest_word
+from search.jaccard import char_ngrams, jaccard_similarity
 
 # Shared with the exact engine. extract_query_terms is re-exported here so
 # existing imports keep working.
-from query_processing import STOPWORDS, extract_query_terms
+from search.query_processing import STOPWORDS, extract_query_terms
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 
 CHUNKS_FILE = DATA_DIR / "processed_chunks.json"
