@@ -3,10 +3,10 @@ import json
 import time
 from pathlib import Path
 
-from approximate_search import load_collection, search_approximate
+from search.approximate_search import load_collection, search_approximate
 
-BASE_DIR = Path(__file__).resolve().parent
-RESULTS_FILE = BASE_DIR / "data" / "approximate_results.json"
+BASE_DIR = Path(__file__).resolve().parent.parent
+RESULTS_FILE = BASE_DIR / "reports" / "results" / "approximate_results.json"
 
 TEST_QUERIES = [
     "What happened to the bell rope?",

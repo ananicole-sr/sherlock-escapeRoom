@@ -737,8 +737,8 @@
     }
   },
   "sources": {
-    "evaluation": "data/evaluation_results.json",
-    "scaling": "data/scaling_results.json",
-    "review": "reports/evaluation_review.json"
+    "evaluation": "reports/results/evaluation_results.json",
+    "scaling": "reports/results/scaling_results.json",
+    "review": "reports/review/evaluation_review.json"
   }
 }

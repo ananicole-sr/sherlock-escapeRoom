@@ -2,14 +2,14 @@ import json
 import random
 from pathlib import Path
 
-import watson
-from approximate_search import load_collection, search_approximate
-from exact_search import exact_search, INVERTED_INDEX, CHUNK_MAP
-from kmp import kmp_search
-from query_processing import extract_query_terms
-from z_function import z_search
+from assistant import watson
+from search.approximate_search import load_collection, search_approximate
+from search.exact_search import exact_search, INVERTED_INDEX, CHUNK_MAP
+from search.kmp import kmp_search
+from search.query_processing import extract_query_terms
+from search.z_function import z_search
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 STORIES = [None, "The Speckled Band", "The Blue Carbuncle", "The Red-Headed League"]
 

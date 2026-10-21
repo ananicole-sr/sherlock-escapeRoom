@@ -28,16 +28,16 @@ import platform
 import time
 from pathlib import Path
 
-import exact_search
-from approximate_search import STOPWORDS, search_approximate
-from inverted_index import build_inverted_index
-from jaccard import char_ngrams
+from search import exact_search
+from search.approximate_search import STOPWORDS, search_approximate
+from search.inverted_index import build_inverted_index
+from search.jaccard import char_ngrams
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 CHUNKS_FILE = BASE_DIR / "data" / "processed_chunks.json"
-QUESTIONS_FILE = BASE_DIR / "data" / "evaluation_questions.json"
-RESULTS_FILE = BASE_DIR / "data" / "scaling_results.json"
-SUMMARY_FILE = BASE_DIR / "data" / "scaling_summary.csv"
+QUESTIONS_FILE = BASE_DIR / "reports" / "results" / "evaluation_questions.json"
+RESULTS_FILE = BASE_DIR / "reports" / "results" / "scaling_results.json"
+SUMMARY_FILE = BASE_DIR / "reports" / "results" / "scaling_summary.csv"
 
 SB = "The Speckled Band"
 BC = "The Blue Carbuncle"
@@ -245,7 +245,7 @@ def main():
             "description": "Retrieval time versus real collection size (stage 6). Qwen not used.",
             "configuration": {
                 "orders": ORDERS,
-                "questions": "the 20 questions of data/evaluation_questions.json; each order uses "
+                "questions": "the 20 questions of reports/results/evaluation_questions.json; each order uses "
                              "the questions of its base story",
                 "engines": ENGINES,
                 "top_k": TOP_K,

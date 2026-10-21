@@ -13,7 +13,7 @@ from pathlib import Path
 
 import streamlit.components.v1 as components
 
-COMPONENTS_DIR = Path(__file__).resolve().parent.parent / "components"
+COMPONENTS_DIR = Path(__file__).resolve().parent / "components"
 
 _scene = components.declare_component("scene", path=str(COMPONENTS_DIR / "scene"))
 _ask = components.declare_component("ask", path=str(COMPONENTS_DIR / "ask"))

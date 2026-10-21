@@ -9,8 +9,8 @@ import html
 
 import streamlit as st
 
-import watson
-from approximate_search import search_approximate
+from assistant import watson
+from search.approximate_search import search_approximate
 from ui.widgets import watson_avatar
 
 STORIES = ["All stories", "The Speckled Band", "The Blue Carbuncle", "The Red-Headed League"]
@@ -30,7 +30,7 @@ def exact_engine():
         exact_search.py (stage 3), or None if the module is missing.
     """
     try:
-        import exact_search
+        from search import exact_search
     except ImportError:
         return None
 

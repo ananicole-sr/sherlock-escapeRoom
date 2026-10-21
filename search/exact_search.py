@@ -3,15 +3,15 @@ import json
 import time
 from pathlib import Path
 
-from kmp import kmp_search
-from z_function import z_search
+from search.kmp import kmp_search
+from search.z_function import z_search
 
 # Same preprocessing as the approximate engine, without spelling correction:
 # exact search looks for the terms exactly as they were written.
-from query_processing import extract_query_terms
+from search.query_processing import extract_query_terms
 
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 
 with open(DATA_DIR / "processed_chunks.json", "r", encoding="utf-8") as file:

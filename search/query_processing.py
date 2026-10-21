@@ -17,7 +17,7 @@
 
 import re
 
-from text_cleaner import normalize_text
+from search.text_cleaner import normalize_text
 
 STOPWORDS = {
     "a", "about", "all", "an", "and", "any", "are", "as", "at", "be", "been",

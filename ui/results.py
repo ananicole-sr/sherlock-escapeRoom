@@ -15,10 +15,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 FIGURES = BASE_DIR / "reports" / "figures"
 
 SOURCES = {
-    "evaluation": (BASE_DIR / "data" / "evaluation_results.json", "run_evaluation.py"),
-    "scaling": (BASE_DIR / "data" / "scaling_results.json", "run_scaling_experiment.py"),
-    "review": (BASE_DIR / "reports" / "evaluation_review.json", "build_review_v2.py"),
-    "numbers": (FIGURES / "stage6_numbers.json", "make_stage6_figures.py")
+    "evaluation": (BASE_DIR / "reports" / "results" / "evaluation_results.json", "evaluation/run_evaluation.py"),
+    "scaling": (BASE_DIR / "reports" / "results" / "scaling_results.json", "evaluation/run_scaling_experiment.py"),
+    "review": (BASE_DIR / "reports" / "review" / "evaluation_review.json", "evaluation/build_review_v2.py"),
+    "numbers": (FIGURES / "stage6_numbers.json", "evaluation/make_stage6_figures.py")
 }
 
 ENGINES = ["kmp", "z", "approximate"]
@@ -71,7 +71,7 @@ def figure(name, shows, observed, limits):
         st.image(str(path), width="stretch")
     else:
         missing(f"Falta <code>reports/figures/{esc(name)}</code>. Lo genera "
-                f"<code>make_stage6_figures.py</code>.")
+                f"<code>evaluation/make_stage6_figures.py</code>.")
 
     st.markdown(
         "<div class='res-caption'>"

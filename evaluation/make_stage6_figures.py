@@ -1,9 +1,9 @@
 
 # -------------------------------------------------------------------------
 # Stage 6 figures, made only from saved results (nothing is re-run):
-#   data/evaluation_results.json   60 runs (20 questions x KMP, Z, approximate)
-#   data/scaling_results.json      retrieval time vs collection size
-#   reports/evaluation_review.json preliminary AI review (version 2)
+#   reports/results/evaluation_results.json   60 runs (20 questions x KMP, Z, approximate)
+#   reports/results/scaling_results.json      retrieval time vs collection size
+#   reports/review/evaluation_review.json preliminary AI review (version 2)
 #
 # Output: reports/figures/*.png and reports/figures/stage6_numbers.json
 # (the numbers behind the figures, reused by the app and the analysis).
@@ -19,10 +19,10 @@ matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
 
-BASE_DIR = Path(__file__).resolve().parent
-EVALUATION = BASE_DIR / "data" / "evaluation_results.json"
-SCALING = BASE_DIR / "data" / "scaling_results.json"
-REVIEW = BASE_DIR / "reports" / "evaluation_review.json"
+BASE_DIR = Path(__file__).resolve().parent.parent
+EVALUATION = BASE_DIR / "reports" / "results" / "evaluation_results.json"
+SCALING = BASE_DIR / "reports" / "results" / "scaling_results.json"
+REVIEW = BASE_DIR / "reports" / "review" / "evaluation_review.json"
 FIGURES = BASE_DIR / "reports" / "figures"
 
 ENGINES = ["kmp", "z", "approximate"]
@@ -348,7 +348,7 @@ def quality_chart(numbers):
     figure.suptitle("Calidad del contexto y de las respuestas: valoración PRELIMINAR de IA, pendiente de revisión humana",
                     x=0.0, ha="left", fontsize=12, fontweight="bold", color=INK, y=1.01)
     figure.tight_layout(h_pad=2.2)
-    note(figure, "Las barras cuentan ejecuciones (20 por motor), según reports/evaluation_review.json (versión 2). "
+    note(figure, "Las barras cuentan ejecuciones (20 por motor), según reports/review/evaluation_review.json (versión 2). "
                  "La corrección se valora contra el relato y la respuesta esperada; el respaldo, solo contra el "
                  "contexto que el modelo recibió realmente. Las asignó una IA y no han sido validadas por una persona.")
     save(figure, "fig7_quality_preliminary.png")

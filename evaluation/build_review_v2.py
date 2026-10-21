@@ -1,13 +1,13 @@
 
 # -------------------------------------------------------------------------
-# Builds reports/evaluation_review.json: the preliminary AI review of the
+# Builds reports/review/evaluation_review.json: the preliminary AI review of the
 # 60 evaluation runs in a structured form (version 2).
 #
-#   version 1  reports/evaluation_review.md (kept unchanged)
+#   version 1  reports/review/evaluation_review.md (kept unchanged)
 #   version 2  version 1 + the corrections listed in CORRECTIONS below,
-#              documented in reports/evaluation_review_corrections.md
+#              documented in reports/review/evaluation_review_corrections.md
 #
-# The answers and contexts come from data/evaluation_results.json and are
+# The answers and contexts come from reports/results/evaluation_results.json and are
 # never modified. All assessments are preliminary, made by an AI, and
 # pending human review.
 # -------------------------------------------------------------------------
@@ -16,10 +16,10 @@ import json
 import re
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent
-REVIEW_V1 = BASE_DIR / "reports" / "evaluation_review.md"
-RESULTS_FILE = BASE_DIR / "data" / "evaluation_results.json"
-OUTPUT = BASE_DIR / "reports" / "evaluation_review.json"
+BASE_DIR = Path(__file__).resolve().parent.parent
+REVIEW_V1 = BASE_DIR / "reports" / "review" / "evaluation_review.md"
+RESULTS_FILE = BASE_DIR / "reports" / "results" / "evaluation_results.json"
+OUTPUT = BASE_DIR / "reports" / "review" / "evaluation_review.json"
 
 SECTIONS = {
     "KMP": "kmp",
@@ -34,7 +34,7 @@ CORRECTED_REFERENCES = {
                               "Merryweather sits on contains 2,000 napoleons; 30,000 were borrowed in total.",
         "reason": "The story gives the quantity for one crate only (\"The crate upon which I sit contains "
                   "2,000 napoleons\") and the total borrowed (\"30,000 napoleons from the Bank of France\"); "
-                  "it never says \"each crate\". data/evaluation_questions.json is left unchanged; this is "
+                  "it never says \"each crate\". reports/results/evaluation_questions.json is left unchanged; this is "
                   "the corrected reference used in version 2."
     }
 }
@@ -138,9 +138,9 @@ def main():
             "status": "Preliminary AI assessment, pending human review. Not a human evaluation.",
             "version": 2,
             "sources": {
-                "version_1": "reports/evaluation_review.md",
-                "corrections": "reports/evaluation_review_corrections.md",
-                "answers_and_contexts": "data/evaluation_results.json (unchanged)"
+                "version_1": "reports/review/evaluation_review.md",
+                "corrections": "reports/review/evaluation_review_corrections.md",
+                "answers_and_contexts": "reports/results/evaluation_results.json (unchanged)"
             },
             "corrected_references": CORRECTED_REFERENCES,
             "corrections": CORRECTIONS,

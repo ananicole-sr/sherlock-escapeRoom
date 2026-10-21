@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
-from text_cleaner import normalize_text, tokenize
+from search.text_cleaner import normalize_text, tokenize
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 
 INPUT_FILE = DATA_DIR / "chunks.json"

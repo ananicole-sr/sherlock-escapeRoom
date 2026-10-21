@@ -3,12 +3,9 @@
 __pycache__/
 *.pyc
 .env
-
-/background
+.~lock.*#
 
 # Documentos específicos que no quiero subir
 /reports/reporte_etapas_5_6.docx
 /reports/reporte_etapas_5_6.pdf
 /reports/reporte_etapas_5_6.md
-/reports/reporte_etapas_5_6.docx
-/reports/reporte_etapas_5_6.pdf

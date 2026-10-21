@@ -1,9 +1,9 @@
 import json
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 CHUNKS_FILE = BASE_DIR / "data" / "processed_chunks.json"
-OUTPUT = BASE_DIR / "data" / "evaluation_questions.json"
+OUTPUT = BASE_DIR / "reports" / "results" / "evaluation_questions.json"
 
 SB = "The Speckled Band"
 BC = "The Blue Carbuncle"

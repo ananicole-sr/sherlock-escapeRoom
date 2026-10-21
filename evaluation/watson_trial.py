@@ -3,11 +3,11 @@ import sys
 import time
 from pathlib import Path
 
-import watson
-from approximate_search import load_collection, search_approximate
+from assistant import watson
+from search.approximate_search import load_collection, search_approximate
 
-BASE_DIR = Path(__file__).resolve().parent
-RESULTS_DIR = BASE_DIR / "data"
+BASE_DIR = Path(__file__).resolve().parent.parent
+RESULTS_DIR = BASE_DIR / "reports" / "archive"
 
 # One question per story, searched inside that story as the game does, and
 # one question the documents cannot answer.
