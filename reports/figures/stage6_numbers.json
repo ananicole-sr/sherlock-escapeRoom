@@ -1,0 +1,744 @@
+{
+  "evaluation": {
+    "kmp": {
+      "runs": 20,
+      "retrieval_mean_ms": 41.07,
+      "retrieval_median_ms": 34.17,
+      "retrieval_min_ms": 5.31,
+      "retrieval_max_ms": 107.18,
+      "generation_mean_ms": 6559.2,
+      "generation_median_ms": 5807.6,
+      "generation_min_ms": 4315.0,
+      "generation_max_ms": 19545.4,
+      "candidates_mean": 42.5,
+      "examined_mean": 23.5,
+      "matched_mean": 23.5,
+      "returned_mean": 5,
+      "evidence_retrieved": 12,
+      "answerable": 17
+    },
+    "z": {
+      "runs": 20,
+      "retrieval_mean_ms": 48.94,
+      "retrieval_median_ms": 40.36,
+      "retrieval_min_ms": 6.33,
+      "retrieval_max_ms": 124.69,
+      "generation_mean_ms": 6825.9,
+      "generation_median_ms": 5743.5,
+      "generation_min_ms": 4311.6,
+      "generation_max_ms": 23485.3,
+      "candidates_mean": 42.5,
+      "examined_mean": 23.5,
+      "matched_mean": 23.5,
+      "returned_mean": 5,
+      "evidence_retrieved": 12,
+      "answerable": 17
+    },
+    "approximate": {
+      "runs": 20,
+      "retrieval_mean_ms": 22.56,
+      "retrieval_median_ms": 2.47,
+      "retrieval_min_ms": 1.38,
+      "retrieval_max_ms": 70.3,
+      "generation_mean_ms": 6291.0,
+      "generation_median_ms": 6076.4,
+      "generation_min_ms": 4586.0,
+      "generation_max_ms": 10606.8,
+      "candidates_mean": 147,
+      "examined_mean": 49.0,
+      "matched_mean": 48.6,
+      "returned_mean": 5,
+      "evidence_retrieved": 13,
+      "answerable": 17
+    }
+  },
+  "scaling": [
+    {
+      "order": "A",
+      "stories": 1,
+      "chunks": 54,
+      "characters": 52644,
+      "engine": "kmp",
+      "questions": 7,
+      "mean_ms": 79.52,
+      "median_ms": 83.59,
+      "examined_mean": 28.4,
+      "matched_mean": 28.4,
+      "returned_mean": 5,
+      "evidence_in_top_k": 4,
+      "answerable": 6
+    },
+    {
+      "order": "A",
+      "stories": 1,
+      "chunks": 54,
+      "characters": 52644,
+      "engine": "z",
+      "questions": 7,
+      "mean_ms": 91.74,
+      "median_ms": 96.57,
+      "examined_mean": 28.4,
+      "matched_mean": 28.4,
+      "returned_mean": 5,
+      "evidence_in_top_k": 4,
+      "answerable": 6
+    },
+    {
+      "order": "A",
+      "stories": 1,
+      "chunks": 54,
+      "characters": 52644,
+      "engine": "approximate",
+      "questions": 7,
+      "mean_ms": 28.16,
+      "median_ms": 22.73,
+      "examined_mean": 54,
+      "matched_mean": 53.7,
+      "returned_mean": 5,
+      "evidence_in_top_k": 4,
+      "answerable": 6
+    },
+    {
+      "order": "A",
+      "stories": 2,
+      "chunks": 97,
+      "characters": 94501,
+      "engine": "kmp",
+      "questions": 7,
+      "mean_ms": 66.11,
+      "median_ms": 59.68,
+      "examined_mean": 37.4,
+      "matched_mean": 37.4,
+      "returned_mean": 5,
+      "evidence_in_top_k": 4,
+      "answerable": 6
+    },
+    {
+      "order": "A",
+      "stories": 2,
+      "chunks": 97,
+      "characters": 94501,
+      "engine": "z",
+      "questions": 7,
+      "mean_ms": 77.82,
+      "median_ms": 69.96,
+      "examined_mean": 37.4,
+      "matched_mean": 37.4,
+      "returned_mean": 5,
+      "evidence_in_top_k": 4,
+      "answerable": 6
+    },
+    {
+      "order": "A",
+      "stories": 2,
+      "chunks": 97,
+      "characters": 94501,
+      "engine": "approximate",
+      "questions": 7,
+      "mean_ms": 24.31,
+      "median_ms": 20.52,
+      "examined_mean": 97,
+      "matched_mean": 96.4,
+      "returned_mean": 5,
+      "evidence_in_top_k": 4,
+      "answerable": 6
+    },
+    {
+      "order": "A",
+      "stories": 3,
+      "chunks": 147,
+      "characters": 143485,
+      "engine": "kmp",
+      "questions": 7,
+      "mean_ms": 83.95,
+      "median_ms": 68.8,
+      "examined_mean": 47.4,
+      "matched_mean": 47.4,
+      "returned_mean": 5,
+      "evidence_in_top_k": 4,
+      "answerable": 6
+    },
+    {
+      "order": "A",
+      "stories": 3,
+      "chunks": 147,
+      "characters": 143485,
+      "engine": "z",
+      "questions": 7,
+      "mean_ms": 98.19,
+      "median_ms": 80.35,
+      "examined_mean": 47.4,
+      "matched_mean": 47.4,
+      "returned_mean": 5,
+      "evidence_in_top_k": 4,
+      "answerable": 6
+    },
+    {
+      "order": "A",
+      "stories": 3,
+      "chunks": 147,
+      "characters": 143485,
+      "engine": "approximate",
+      "questions": 7,
+      "mean_ms": 29.44,
+      "median_ms": 8.73,
+      "examined_mean": 147,
+      "matched_mean": 146,
+      "returned_mean": 5,
+      "evidence_in_top_k": 4,
+      "answerable": 6
+    },
+    {
+      "order": "B",
+      "stories": 1,
+      "chunks": 43,
+      "characters": 41857,
+      "engine": "kmp",
+      "questions": 7,
+      "mean_ms": 34.2,
+      "median_ms": 30.7,
+      "examined_mean": 18.3,
+      "matched_mean": 18.3,
+      "returned_mean": 5,
+      "evidence_in_top_k": 6,
+      "answerable": 6
+    },
+    {
+      "order": "B",
+      "stories": 1,
+      "chunks": 43,
+      "characters": 41857,
+      "engine": "z",
+      "questions": 7,
+      "mean_ms": 39.71,
+      "median_ms": 35.5,
+      "examined_mean": 18.3,
+      "matched_mean": 18.3,
+      "returned_mean": 5,
+      "evidence_in_top_k": 6,
+      "answerable": 6
+    },
+    {
+      "order": "B",
+      "stories": 1,
+      "chunks": 43,
+      "characters": 41857,
+      "engine": "approximate",
+      "questions": 7,
+      "mean_ms": 15.6,
+      "median_ms": 16.71,
+      "examined_mean": 43,
+      "matched_mean": 42.7,
+      "returned_mean": 5,
+      "evidence_in_top_k": 6,
+      "answerable": 6
+    },
+    {
+      "order": "B",
+      "stories": 2,
+      "chunks": 93,
+      "characters": 90841,
+      "engine": "kmp",
+      "questions": 7,
+      "mean_ms": 52.58,
+      "median_ms": 34.32,
+      "examined_mean": 27.9,
+      "matched_mean": 27.9,
+      "returned_mean": 5,
+      "evidence_in_top_k": 6,
+      "answerable": 6
+    },
+    {
+      "order": "B",
+      "stories": 2,
+      "chunks": 93,
+      "characters": 90841,
+      "engine": "z",
+      "questions": 7,
+      "mean_ms": 61.79,
+      "median_ms": 40.6,
+      "examined_mean": 27.9,
+      "matched_mean": 27.9,
+      "returned_mean": 5,
+      "evidence_in_top_k": 6,
+      "answerable": 6
+    },
+    {
+      "order": "B",
+      "stories": 2,
+      "chunks": 93,
+      "characters": 90841,
+      "engine": "approximate",
+      "questions": 7,
+      "mean_ms": 17.57,
+      "median_ms": 5.69,
+      "examined_mean": 93,
+      "matched_mean": 92.4,
+      "returned_mean": 5,
+      "evidence_in_top_k": 6,
+      "answerable": 6
+    },
+    {
+      "order": "B",
+      "stories": 3,
+      "chunks": 147,
+      "characters": 143485,
+      "engine": "kmp",
+      "questions": 7,
+      "mean_ms": 66.69,
+      "median_ms": 43.71,
+      "examined_mean": 34.7,
+      "matched_mean": 34.7,
+      "returned_mean": 5,
+      "evidence_in_top_k": 6,
+      "answerable": 6
+    },
+    {
+      "order": "B",
+      "stories": 3,
+      "chunks": 147,
+      "characters": 143485,
+      "engine": "z",
+      "questions": 7,
+      "mean_ms": 77.63,
+      "median_ms": 51.03,
+      "examined_mean": 34.7,
+      "matched_mean": 34.7,
+      "returned_mean": 5,
+      "evidence_in_top_k": 6,
+      "answerable": 6
+    },
+    {
+      "order": "B",
+      "stories": 3,
+      "chunks": 147,
+      "characters": 143485,
+      "engine": "approximate",
+      "questions": 7,
+      "mean_ms": 25.13,
+      "median_ms": 8.71,
+      "examined_mean": 147,
+      "matched_mean": 146.1,
+      "returned_mean": 5,
+      "evidence_in_top_k": 6,
+      "answerable": 6
+    },
+    {
+      "order": "C",
+      "stories": 1,
+      "chunks": 50,
+      "characters": 48984,
+      "engine": "kmp",
+      "questions": 6,
+      "mean_ms": 40.29,
+      "median_ms": 32.79,
+      "examined_mean": 23.8,
+      "matched_mean": 23.8,
+      "returned_mean": 5,
+      "evidence_in_top_k": 2,
+      "answerable": 5
+    },
+    {
+      "order": "C",
+      "stories": 1,
+      "chunks": 50,
+      "characters": 48984,
+      "engine": "z",
+      "questions": 6,
+      "mean_ms": 46.71,
+      "median_ms": 37.89,
+      "examined_mean": 23.8,
+      "matched_mean": 23.8,
+      "returned_mean": 5,
+      "evidence_in_top_k": 2,
+      "answerable": 5
+    },
+    {
+      "order": "C",
+      "stories": 1,
+      "chunks": 50,
+      "characters": 48984,
+      "engine": "approximate",
+      "questions": 6,
+      "mean_ms": 16.96,
+      "median_ms": 16.87,
+      "examined_mean": 50,
+      "matched_mean": 49.7,
+      "returned_mean": 5,
+      "evidence_in_top_k": 3,
+      "answerable": 5
+    },
+    {
+      "order": "C",
+      "stories": 2,
+      "chunks": 104,
+      "characters": 101628,
+      "engine": "kmp",
+      "questions": 6,
+      "mean_ms": 58.28,
+      "median_ms": 47.78,
+      "examined_mean": 35.5,
+      "matched_mean": 35.5,
+      "returned_mean": 5,
+      "evidence_in_top_k": 2,
+      "answerable": 5
+    },
+    {
+      "order": "C",
+      "stories": 2,
+      "chunks": 104,
+      "characters": 101628,
+      "engine": "z",
+      "questions": 6,
+      "mean_ms": 68.42,
+      "median_ms": 55.98,
+      "examined_mean": 35.5,
+      "matched_mean": 35.5,
+      "returned_mean": 5,
+      "evidence_in_top_k": 2,
+      "answerable": 5
+    },
+    {
+      "order": "C",
+      "stories": 2,
+      "chunks": 104,
+      "characters": 101628,
+      "engine": "approximate",
+      "questions": 6,
+      "mean_ms": 21.94,
+      "median_ms": 18.94,
+      "examined_mean": 104,
+      "matched_mean": 102.7,
+      "returned_mean": 5,
+      "evidence_in_top_k": 3,
+      "answerable": 5
+    },
+    {
+      "order": "C",
+      "stories": 3,
+      "chunks": 147,
+      "characters": 143485,
+      "engine": "kmp",
+      "questions": 6,
+      "mean_ms": 74.51,
+      "median_ms": 63.84,
+      "examined_mean": 45.7,
+      "matched_mean": 45.7,
+      "returned_mean": 5,
+      "evidence_in_top_k": 2,
+      "answerable": 5
+    },
+    {
+      "order": "C",
+      "stories": 3,
+      "chunks": 147,
+      "characters": 143485,
+      "engine": "z",
+      "questions": 6,
+      "mean_ms": 88.91,
+      "median_ms": 74.21,
+      "examined_mean": 45.7,
+      "matched_mean": 45.7,
+      "returned_mean": 5,
+      "evidence_in_top_k": 2,
+      "answerable": 5
+    },
+    {
+      "order": "C",
+      "stories": 3,
+      "chunks": 147,
+      "characters": 143485,
+      "engine": "approximate",
+      "questions": 6,
+      "mean_ms": 26.31,
+      "median_ms": 22.56,
+      "examined_mean": 147,
+      "matched_mean": 145.5,
+      "returned_mean": 5,
+      "evidence_in_top_k": 3,
+      "answerable": 5
+    }
+  ],
+  "scaling_collections": [
+    {
+      "order": "A",
+      "base_story": "The Speckled Band",
+      "size": {
+        "stories": 1,
+        "story_names": [
+          "The Speckled Band"
+        ],
+        "chunks": 54,
+        "collection_characters": 52644,
+        "normalized_characters": 50762,
+        "tokens": 9947,
+        "index_terms": 2046,
+        "content_vocabulary": 1972
+      },
+      "preparation_ms": {
+        "select_chunks_ms": 5.869,
+        "inverted_index_and_vocabulary_ms": 8.809,
+        "approximate_tokens_ms": 1.192,
+        "approximate_char_ngrams_ms": 18.591,
+        "total_ms": 34.461
+      }
+    },
+    {
+      "order": "A",
+      "base_story": "The Speckled Band",
+      "size": {
+        "stories": 2,
+        "story_names": [
+          "The Speckled Band",
+          "The Blue Carbuncle"
+        ],
+        "chunks": 97,
+        "collection_characters": 94501,
+        "normalized_characters": 90835,
+        "tokens": 17914,
+        "index_terms": 2943,
+        "content_vocabulary": 2869
+      },
+      "preparation_ms": {
+        "select_chunks_ms": 5.508,
+        "inverted_index_and_vocabulary_ms": 5.294,
+        "approximate_tokens_ms": 1.389,
+        "approximate_char_ngrams_ms": 18.472,
+        "total_ms": 30.663
+      }
+    },
+    {
+      "order": "A",
+      "base_story": "The Speckled Band",
+      "size": {
+        "stories": 3,
+        "story_names": [
+          "The Speckled Band",
+          "The Blue Carbuncle",
+          "The Red-Headed League"
+        ],
+        "chunks": 147,
+        "collection_characters": 143485,
+        "normalized_characters": 137878,
+        "tokens": 27196,
+        "index_terms": 3783,
+        "content_vocabulary": 3709
+      },
+      "preparation_ms": {
+        "select_chunks_ms": 7.727,
+        "inverted_index_and_vocabulary_ms": 6.569,
+        "approximate_tokens_ms": 1.523,
+        "approximate_char_ngrams_ms": 25.98,
+        "total_ms": 41.799
+      }
+    },
+    {
+      "order": "B",
+      "base_story": "The Blue Carbuncle",
+      "size": {
+        "stories": 1,
+        "story_names": [
+          "The Blue Carbuncle"
+        ],
+        "chunks": 43,
+        "collection_characters": 41857,
+        "normalized_characters": 40073,
+        "tokens": 7967,
+        "index_terms": 1751,
+        "content_vocabulary": 1678
+      },
+      "preparation_ms": {
+        "select_chunks_ms": 2.264,
+        "inverted_index_and_vocabulary_ms": 2.147,
+        "approximate_tokens_ms": 0.465,
+        "approximate_char_ngrams_ms": 6.719,
+        "total_ms": 11.595
+      }
+    },
+    {
+      "order": "B",
+      "base_story": "The Blue Carbuncle",
+      "size": {
+        "stories": 2,
+        "story_names": [
+          "The Blue Carbuncle",
+          "The Red-Headed League"
+        ],
+        "chunks": 93,
+        "collection_characters": 90841,
+        "normalized_characters": 87116,
+        "tokens": 17249,
+        "index_terms": 2878,
+        "content_vocabulary": 2804
+      },
+      "preparation_ms": {
+        "select_chunks_ms": 5.177,
+        "inverted_index_and_vocabulary_ms": 4.462,
+        "approximate_tokens_ms": 0.997,
+        "approximate_char_ngrams_ms": 16.8,
+        "total_ms": 27.436
+      }
+    },
+    {
+      "order": "B",
+      "base_story": "The Blue Carbuncle",
+      "size": {
+        "stories": 3,
+        "story_names": [
+          "The Blue Carbuncle",
+          "The Red-Headed League",
+          "The Speckled Band"
+        ],
+        "chunks": 147,
+        "collection_characters": 143485,
+        "normalized_characters": 137878,
+        "tokens": 27196,
+        "index_terms": 3783,
+        "content_vocabulary": 3709
+      },
+      "preparation_ms": {
+        "select_chunks_ms": 7.837,
+        "inverted_index_and_vocabulary_ms": 6.331,
+        "approximate_tokens_ms": 1.6,
+        "approximate_char_ngrams_ms": 26.231,
+        "total_ms": 41.999
+      }
+    },
+    {
+      "order": "C",
+      "base_story": "The Red-Headed League",
+      "size": {
+        "stories": 1,
+        "story_names": [
+          "The Red-Headed League"
+        ],
+        "chunks": 50,
+        "collection_characters": 48984,
+        "normalized_characters": 47043,
+        "tokens": 9282,
+        "index_terms": 1920,
+        "content_vocabulary": 1848
+      },
+      "preparation_ms": {
+        "select_chunks_ms": 2.804,
+        "inverted_index_and_vocabulary_ms": 2.631,
+        "approximate_tokens_ms": 0.554,
+        "approximate_char_ngrams_ms": 8.438,
+        "total_ms": 14.427
+      }
+    },
+    {
+      "order": "C",
+      "base_story": "The Red-Headed League",
+      "size": {
+        "stories": 2,
+        "story_names": [
+          "The Red-Headed League",
+          "The Speckled Band"
+        ],
+        "chunks": 104,
+        "collection_characters": 101628,
+        "normalized_characters": 97805,
+        "tokens": 19229,
+        "index_terms": 3081,
+        "content_vocabulary": 3007
+      },
+      "preparation_ms": {
+        "select_chunks_ms": 5.979,
+        "inverted_index_and_vocabulary_ms": 6.268,
+        "approximate_tokens_ms": 1.342,
+        "approximate_char_ngrams_ms": 19.392,
+        "total_ms": 32.981
+      }
+    },
+    {
+      "order": "C",
+      "base_story": "The Red-Headed League",
+      "size": {
+        "stories": 3,
+        "story_names": [
+          "The Red-Headed League",
+          "The Speckled Band",
+          "The Blue Carbuncle"
+        ],
+        "chunks": 147,
+        "collection_characters": 143485,
+        "normalized_characters": 137878,
+        "tokens": 27196,
+        "index_terms": 3783,
+        "content_vocabulary": 3709
+      },
+      "preparation_ms": {
+        "select_chunks_ms": 7.783,
+        "inverted_index_and_vocabulary_ms": 6.178,
+        "approximate_tokens_ms": 1.479,
+        "approximate_char_ngrams_ms": 25.308,
+        "total_ms": 40.748
+      }
+    }
+  ],
+  "quality_preliminary_ai": {
+    "kmp": {
+      "context_usefulness": {
+        "sufficient": 13,
+        "partial": 0,
+        "insufficient": 7
+      },
+      "correctness": {
+        "correct": 6,
+        "partial": 4,
+        "incorrect": 9,
+        "appropriate abstention": 1,
+        "invalid abstention": 0
+      },
+      "support": {
+        "complete": 9,
+        "partial": 5,
+        "unsupported": 6
+      }
+    },
+    "z": {
+      "context_usefulness": {
+        "sufficient": 13,
+        "partial": 0,
+        "insufficient": 7
+      },
+      "correctness": {
+        "correct": 6,
+        "partial": 4,
+        "incorrect": 9,
+        "appropriate abstention": 1,
+        "invalid abstention": 0
+      },
+      "support": {
+        "complete": 9,
+        "partial": 5,
+        "unsupported": 6
+      }
+    },
+    "approximate": {
+      "context_usefulness": {
+        "sufficient": 14,
+        "partial": 0,
+        "insufficient": 6
+      },
+      "correctness": {
+        "correct": 8,
+        "partial": 4,
+        "incorrect": 7,
+        "appropriate abstention": 0,
+        "invalid abstention": 1
+      },
+      "support": {
+        "complete": 9,
+        "partial": 5,
+        "unsupported": 6
+      }
+    }
+  },
+  "sources": {
+    "evaluation": "data/evaluation_results.json",
+    "scaling": "data/scaling_results.json",
+    "review": "reports/evaluation_review.json"
+  }
+}

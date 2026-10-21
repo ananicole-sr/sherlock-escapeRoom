@@ -3,9 +3,12 @@ import json
 import time
 from pathlib import Path
 
-from text_cleaner import tokenize
 from kmp import kmp_search
 from z_function import z_search
+
+# Same preprocessing as the approximate engine, without spelling correction:
+# exact search looks for the terms exactly as they were written.
+from query_processing import extract_query_terms
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -19,27 +22,8 @@ with open(DATA_DIR / "inverted_index.json", "r", encoding="utf-8") as file:
 
 CHUNK_MAP = {chunk["id"]: chunk for chunk in CHUNKS}
 
-STOPWORDS = {
-    "the", "a", "an", "is", "are", "was", "were",
-    "what", "who", "where", "when", "why", "how",
-    "about", "to", "of", "in", "on", "at", "for",
-    "and", "or", "it", "this", "that", "did",
-    "does", "do", "with", "from", "there"
-}
-
-
 def extract_keywords(query):
-    tokens = tokenize(query)
-
-    keywords = []
-    seen = set()
-
-    for token in tokens:
-        if token not in STOPWORDS and token not in seen:
-            keywords.append(token)
-            seen.add(token)
-
-    return keywords
+    return extract_query_terms(query)
 
 
 def exact_search(query, algorithm="kmp", top_k=5, story=None):
@@ -54,18 +38,24 @@ def exact_search(query, algorithm="kmp", top_k=5, story=None):
 
     keywords = extract_keywords(query)
 
+    # Candidates: chunks that contain at least one keyword according to the
+    # inverted index (hashing), in any story.
     candidate_ids = set()
 
     for keyword in keywords:
         candidate_ids.update(INVERTED_INDEX.get(keyword, []))
 
+    # Examined: the candidates that pass the story filter. Only these are
+    # scanned with KMP or the Z-function.
+    examined_ids = sorted(
+        chunk_id for chunk_id in candidate_ids
+        if story is None or CHUNK_MAP[chunk_id]["story"] == story
+    )
+
     results = []
 
-    for chunk_id in candidate_ids:
+    for chunk_id in examined_ids:
         chunk = CHUNK_MAP[chunk_id]
-
-        if story is not None and chunk["story"] != story:
-            continue
 
         text = chunk["normalized_text"]
 
@@ -99,14 +89,28 @@ def exact_search(query, algorithm="kmp", top_k=5, story=None):
 
     retrieval_time_ms = (time.perf_counter() - start_time) * 1000
 
+    returned = results[:top_k]
+
     return {
         "query": query,
         "algorithm": algorithm,
         "keywords": keywords,
+        "query_terms": keywords,
+        "story_filter": story,
         "retrieval_time_ms": round(retrieval_time_ms, 4),
-        "chunks_examined": len(candidate_ids),
-        "chunks_recovered": len(results),
-        "results": results[:top_k]
+        # Metrics (same meaning in the approximate engine):
+        #   candidates_considered  chunks proposed by the inverted index,
+        #                          before the story filter
+        #   chunks_examined        chunks scanned with KMP / Z, after it
+        #   chunks_matched         chunks with at least one exact match,
+        #                          before top_k
+        #   results_returned       results returned, after top_k
+        "candidates_considered": len(candidate_ids),
+        "chunks_examined": len(examined_ids),
+        "chunks_matched": len(results),
+        "results_returned": len(returned),
+        "chunks_recovered": len(results),   # older name of chunks_matched
+        "results": returned
     }
 
 
@@ -130,8 +134,10 @@ if __name__ == "__main__":
         print(f"Question: {output['query']}")
         print(f"Keywords: {output['keywords']}")
         print(f"Retrieval time: {output['retrieval_time_ms']} ms")
+        print(f"Candidates considered: {output['candidates_considered']}")
         print(f"Chunks examined: {output['chunks_examined']}")
-        print(f"Chunks recovered: {output['chunks_recovered']}")
+        print(f"Chunks matched: {output['chunks_matched']}")
+        print(f"Results returned: {output['results_returned']}")
 
         print("\nTOP 5 RESULTS:")
 

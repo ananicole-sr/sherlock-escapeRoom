@@ -1,0 +1,410 @@
+{
+  "description": "Evaluation questions for stage 6. Evidence quotes are verified against data/processed_chunks.json by build_evaluation_questions.py.",
+  "distribution": {
+    "The Speckled Band": 7,
+    "The Blue Carbuncle": 7,
+    "The Red-Headed League": 6
+  },
+  "questions": [
+    {
+      "id": "SB01",
+      "story": "The Speckled Band",
+      "type": "direct",
+      "question": "What were the last words of Helen Stoner's sister?",
+      "expected_answer": "\"It was the band! The speckled band!\"",
+      "evidence": [
+        [
+          "speckled_band_016",
+          "she suddenly shrieked out in a voice which I shall never forget, 'Oh, my God! Helen! It was the band! The speckled band!'"
+        ],
+        [
+          "speckled_band_016",
+          "a fresh convulsion seized her and choked her words"
+        ]
+      ],
+      "support_note": "Helen narrates her sister's dying cry; a convulsion then stopped her from saying more.",
+      "answer_keywords": [
+        "speckled band"
+      ]
+    },
+    {
+      "id": "SB02",
+      "story": "The Speckled Band",
+      "type": "direct",
+      "question": "Where did the ventilator in Helen Stoner's room lead?",
+      "expected_answer": "Into another room (Dr. Roylott's), not to the outside air.",
+      "evidence": [
+        [
+          "speckled_band_035",
+          "open a ventilator into another room"
+        ],
+        [
+          "speckled_band_041",
+          "her sister could smell Dr. Roylott's cigar. Now, of course that suggested at once that there must be a communication between the two rooms"
+        ]
+      ],
+      "support_note": "035: it opens into another room, not outside. 041: that room is Dr. Roylott's.",
+      "answer_keywords": [
+        "another room",
+        "roylott",
+        "next room",
+        "adjoining"
+      ]
+    },
+    {
+      "id": "SB03",
+      "story": "The Speckled Band",
+      "type": "direct",
+      "question": "What did Holmes find on top of the iron safe in Dr. Roylott's room?",
+      "expected_answer": "A small saucer of milk.",
+      "evidence": [
+        [
+          "speckled_band_036",
+          "a large iron safe"
+        ],
+        [
+          "speckled_band_036",
+          "a small saucer of milk which stood on the top of it"
+        ]
+      ],
+      "support_note": "Same passage: the iron safe in Roylott's room and the saucer of milk on top of it.",
+      "answer_keywords": [
+        "saucer",
+        "milk"
+      ]
+    },
+    {
+      "id": "SB04",
+      "story": "The Speckled Band",
+      "type": "paraphrase",
+      "question": "Why could Helen Stoner not move her bed?",
+      "expected_answer": "It was clamped to the floor.",
+      "evidence": [
+        [
+          "speckled_band_042",
+          "It was clamped to the floor"
+        ],
+        [
+          "speckled_band_042",
+          "The lady could not move her bed"
+        ]
+      ],
+      "support_note": "Holmes states both the cause and the consequence.",
+      "answer_keywords": [
+        "clamped",
+        "fastened"
+      ]
+    },
+    {
+      "id": "SB05",
+      "story": "The Speckled Band",
+      "type": "misspelled",
+      "question": "What animls did Dr. Roylot keep at Stoke Moran?",
+      "original_question": "What animals did Dr. Roylott keep at Stoke Moran?",
+      "expected_answer": "A cheetah and a baboon (he had a passion for Indian animals).",
+      "evidence": [
+        [
+          "speckled_band_011",
+          "He has a passion also for Indian animals"
+        ],
+        [
+          "speckled_band_011",
+          "he has at this moment a cheetah and a baboon, which wander freely over his grounds"
+        ]
+      ],
+      "support_note": "Helen describes her stepfather's animals on the family estate (Stoke Moran).",
+      "answer_keywords": [
+        "cheetah",
+        "baboon"
+      ]
+    },
+    {
+      "id": "SB06",
+      "story": "The Speckled Band",
+      "type": "misspelled",
+      "question": "What was the speckld band realy?",
+      "original_question": "What was the speckled band really?",
+      "expected_answer": "A swamp adder, the deadliest snake in India.",
+      "evidence": [
+        [
+          "speckled_band_049",
+          "It is a swamp adder!"
+        ],
+        [
+          "speckled_band_049",
+          "the deadliest snake in India"
+        ]
+      ],
+      "support_note": "Holmes identifies the 'speckled band' on Roylott's head.",
+      "answer_keywords": [
+        "adder",
+        "snake"
+      ]
+    },
+    {
+      "id": "SB07",
+      "story": "The Speckled Band",
+      "type": "unanswerable",
+      "question": "What colour were the curtains in Helen Stoner's bedroom?",
+      "expected_answer": null,
+      "evidence": [],
+      "absent_terms": [
+        "curtain"
+      ],
+      "note": "The story never describes curtains in the bedroom."
+    },
+    {
+      "id": "BC01",
+      "story": "The Blue Carbuncle",
+      "type": "direct",
+      "question": "Who picked up the hat and the goose after the fight on Tottenham Court Road?",
+      "expected_answer": "Peterson, the commissionaire.",
+      "evidence": [
+        [
+          "blue_carbuncle_003",
+          "You know Peterson, the commissionaire?"
+        ],
+        [
+          "blue_carbuncle_003",
+          "No, no, he found it."
+        ],
+        [
+          "blue_carbuncle_004",
+          "he was left in possession of the field of battle, and also of the spoils of victory in the shape of this battered hat and a most unimpeachable Christmas goose"
+        ]
+      ],
+      "support_note": "003 names Peterson the commissionaire and says he found the hat; 004 says the fight left him with the hat and the goose. The previous quotes only said he walked down Tottenham Court Road.",
+      "answer_keywords": [
+        "peterson",
+        "commissionaire"
+      ]
+    },
+    {
+      "id": "BC02",
+      "story": "The Blue Carbuncle",
+      "type": "direct",
+      "question": "What initials were written inside the hat?",
+      "expected_answer": "H. B. (the card on the goose read 'For Mrs. Henry Baker').",
+      "evidence": [
+        [
+          "blue_carbuncle_006",
+          "the initials \"H. B.\" were scrawled upon one side"
+        ],
+        [
+          "blue_carbuncle_005",
+          "Henry Baker' was printed upon a small card which was tied to the bird's left leg, and it is also true that the initials 'H. B.' are legible upon the lining of this hat"
+        ]
+      ],
+      "support_note": "006 gives the initials; the link to Henry Baker comes from the card quoted in 005, not from the hat itself.",
+      "answer_keywords": [
+        "h b",
+        "h.b.",
+        "henry baker"
+      ]
+    },
+    {
+      "id": "BC03",
+      "story": "The Blue Carbuncle",
+      "type": "direct",
+      "question": "Where did Peterson's wife find the blue stone?",
+      "expected_answer": "In the crop of the goose.",
+      "evidence": [
+        [
+          "blue_carbuncle_012",
+          "See what my wife found in its crop!"
+        ]
+      ],
+      "support_note": "Peterson, holding the blue stone, says his wife found it in the goose's crop.",
+      "answer_keywords": [
+        "crop",
+        "goose"
+      ]
+    },
+    {
+      "id": "BC04",
+      "story": "The Blue Carbuncle",
+      "type": "direct",
+      "question": "Who was accused of stealing the Countess of Morcar's jewel?",
+      "expected_answer": "John Horner, a plumber.",
+      "evidence": [
+        [
+          "blue_carbuncle_014",
+          "John Horner, 26, plumber, was brought up upon the charge of having upon the 22nd inst., abstracted from the jewel-case of the Countess of Morcar"
+        ]
+      ],
+      "support_note": "The newspaper report states the charge against Horner.",
+      "answer_keywords": [
+        "horner"
+      ]
+    },
+    {
+      "id": "BC05",
+      "story": "The Blue Carbuncle",
+      "type": "misspelled",
+      "question": "Wich dealer in Covent Gardn sold the geese to the Alpha Inn?",
+      "original_question": "Which dealer in Covent Garden sold the geese to the Alpha Inn?",
+      "expected_answer": "Breckinridge.",
+      "evidence": [
+        [
+          "blue_carbuncle_024",
+          "I got the two dozen from a salesman in Covent Garden"
+        ],
+        [
+          "blue_carbuncle_024",
+          "Breckinridge is his name"
+        ]
+      ],
+      "support_note": "The landlord of the Alpha names the Covent Garden salesman.",
+      "answer_keywords": [
+        "breckinridge"
+      ]
+    },
+    {
+      "id": "BC06",
+      "story": "The Blue Carbuncle",
+      "type": "misspelled",
+      "question": "What was the real name of the man who called himself John Robinsn?",
+      "original_question": "What was the real name of the man who called himself John Robinson?",
+      "expected_answer": "James Ryder.",
+      "evidence": [
+        [
+          "blue_carbuncle_032",
+          "is John Robinson"
+        ],
+        [
+          "blue_carbuncle_032",
+          "my real name is James Ryder"
+        ]
+      ],
+      "support_note": "The stranger first gives the alias, then his real name.",
+      "answer_keywords": [
+        "ryder"
+      ]
+    },
+    {
+      "id": "BC07",
+      "story": "The Blue Carbuncle",
+      "type": "unanswerable",
+      "question": "What colour was the Countess of Morcar's carriage?",
+      "expected_answer": null,
+      "evidence": [],
+      "absent_terms": [
+        "carriage"
+      ],
+      "note": "No carriage is mentioned in the story."
+    },
+    {
+      "id": "RH01",
+      "story": "The Red-Headed League",
+      "type": "direct",
+      "question": "How much was Jabez Wilson paid each week by the Red-Headed League?",
+      "expected_answer": "Four pounds (£4) a week.",
+      "evidence": [
+        [
+          "red_headed_league_007",
+          "a salary of £ 4 a week"
+        ],
+        [
+          "red_headed_league_018",
+          "Is £ 4 a week"
+        ]
+      ],
+      "support_note": "The advertisement and Duncan Ross both state the pay.",
+      "answer_keywords": [
+        "4",
+        "four"
+      ]
+    },
+    {
+      "id": "RH02",
+      "story": "The Red-Headed League",
+      "type": "direct",
+      "question": "Who was caught in the bank cellar at the end of the case?",
+      "expected_answer": "John Clay.",
+      "evidence": [
+        [
+          "red_headed_league_044",
+          "It's no use, John Clay"
+        ]
+      ],
+      "support_note": "Said by Holmes to the man coming up through the hole in the bank cellar floor.",
+      "answer_keywords": [
+        "clay"
+      ]
+    },
+    {
+      "id": "RH03",
+      "story": "The Red-Headed League",
+      "type": "paraphrase",
+      "question": "Why was Jabez Wilson paid to copy the Encyclopaedia?",
+      "expected_answer": "To get him out of the way for a number of hours every day.",
+      "evidence": [
+        [
+          "red_headed_league_046",
+          "to get this not over-bright pawnbroker out of the way for a number of hours every day"
+        ]
+      ],
+      "support_note": "Holmes's explanation: the League and the copying only existed to keep the pawnbroker away.",
+      "answer_keywords": [
+        "out of the way",
+        "away from",
+        "absence"
+      ],
+      "note": "Same question as the Watson diagnostic; the evidence uses different words."
+    },
+    {
+      "id": "RH04",
+      "story": "The Red-Headed League",
+      "type": "misspelled",
+      "question": "Why did Holmes beat the pavment with his stik?",
+      "original_question": "Why did Holmes beat the pavement with his stick?",
+      "expected_answer": "To find out whether the cellar stretched out in front or behind.",
+      "evidence": [
+        [
+          "red_headed_league_048",
+          "I surprised you by beating upon the pavement with my stick. I was ascertaining whether the cellar stretched out in front or behind."
+        ]
+      ],
+      "support_note": "Holmes explains it himself; 'the shop' was removed from the expected answer because the quote does not say it.",
+      "answer_keywords": [
+        "cellar"
+      ]
+    },
+    {
+      "id": "RH05",
+      "story": "The Red-Headed League",
+      "type": "direct",
+      "question": "What was stored in the crates in the bank cellar?",
+      "expected_answer": "French gold: napoleons, 2,000 in each crate, packed between layers of lead foil.",
+      "evidence": [
+        [
+          "red_headed_league_040",
+          "Your French gold?"
+        ],
+        [
+          "red_headed_league_040",
+          "borrowed for that purpose 30,000 napoleons from the Bank of France"
+        ],
+        [
+          "red_headed_league_040",
+          "The crate upon which I sit contains 2,000 napoleons packed between layers of lead foil"
+        ]
+      ],
+      "support_note": "Merryweather confirms it is the French gold and describes one crate.",
+      "answer_keywords": [
+        "napoleon",
+        "gold"
+      ]
+    },
+    {
+      "id": "RH06",
+      "story": "The Red-Headed League",
+      "type": "unanswerable",
+      "question": "What was the name of the girl who cooked for Jabez Wilson?",
+      "expected_answer": null,
+      "evidence": [],
+      "absent_terms": [],
+      "note": "The girl is mentioned only as 'a girl of fourteen' (red_headed_league_010); her name is never given."
+    }
+  ]
+}

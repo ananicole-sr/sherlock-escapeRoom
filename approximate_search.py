@@ -3,9 +3,12 @@ import json
 import time
 from pathlib import Path
 
-from text_cleaner import tokenize
 from levenshtein import closest_word
 from jaccard import char_ngrams, jaccard_similarity
+
+# Shared with the exact engine. extract_query_terms is re-exported here so
+# existing imports keep working.
+from query_processing import STOPWORDS, extract_query_terms
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
@@ -13,18 +16,6 @@ DATA_DIR = BASE_DIR / "data"
 CHUNKS_FILE = DATA_DIR / "processed_chunks.json"
 VOCABULARY_FILE = DATA_DIR / "vocabulary.json"
 INDEX_FILE = DATA_DIR / "inverted_index.json"
-
-STOPWORDS = {
-    "a", "about", "all", "an", "and", "any", "are", "as", "at", "be", "been",
-    "but", "by", "can", "did", "do", "does", "for", "from", "had", "has",
-    "have", "he", "her", "him", "his", "how", "i", "if", "in", "into", "is",
-    "it", "its", "me", "my", "no", "not", "of", "on", "or", "our", "out",
-    "she", "so", "some", "such", "than", "that", "the", "their", "them",
-    "then", "there", "these", "they", "this", "to", "too", "up", "was",
-    "we", "were", "what", "when", "where", "which", "who", "why", "will",
-    "with", "would", "you", "your"
-}
-
 
 def load_collection():
     with open(CHUNKS_FILE, "r", encoding="utf-8") as file:
@@ -61,19 +52,11 @@ def load_collection():
     return chunks, content_vocabulary, document_frequency
 
 
-def extract_query_terms(question):
-    tokens = tokenize(question)
-
-    terms = []
-
-    for token in tokens:
-        if token not in STOPWORDS:
-            terms.append(token)
-
-    return terms
-
-
 def correct_query_terms(terms, vocabulary, document_frequency, max_distance=2):
+    """
+        Spelling correction with Levenshtein. Only the approximate strategy
+        uses it; the exact engine searches the terms as they were written.
+    """
     vocabulary_set = set(vocabulary)
 
     corrected_terms = []
@@ -177,9 +160,14 @@ def search_approximate(question, chunks, vocabulary, document_frequency,
             "matched_terms": sorted(matched)
         })
 
-    scored_chunks.sort(key=lambda result: result["score"], reverse=True)
+    # Only chunks with a positive score count as found; the chunk id breaks
+    # ties so the ranking is reproducible.
+    found = [result for result in scored_chunks if result["score"] > 0]
+    found.sort(key=lambda result: (-result["score"], result["chunk_id"]))
 
-    results = scored_chunks[:top_k]
+    with_term = sum(1 for result in scored_chunks if result["coverage"] > 0)
+
+    results = found[:top_k]
 
     scoring_ms = (time.perf_counter() - scoring_start) * 1000
 
@@ -195,7 +183,21 @@ def search_approximate(question, chunks, vocabulary, document_frequency,
         "query_terms": terms,
         "corrected_terms": corrected_terms,
         "corrections": corrections,
+        # Metrics (same meaning in the exact engine):
+        #   candidates_considered  chunks the engine could look at before
+        #                          the story filter (the whole collection;
+        #                          this engine uses no index)
+        #   chunks_examined        chunks actually scored, after the filter
+        #   chunks_matched         chunks with score > 0, before top_k
+        #   results_returned       results returned, after top_k
+        #   chunks_with_term_match chunks containing at least one query term
+        #                          (character n-grams give almost every
+        #                          chunk a small positive score)
+        "candidates_considered": len(chunks),
         "chunks_examined": len(searched_chunks),
+        "chunks_matched": len(found),
+        "results_returned": len(results),
+        "chunks_with_term_match": with_term,
         "story_filter": story,
         "results": results
     }

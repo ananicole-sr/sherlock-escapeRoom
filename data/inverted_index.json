@@ -5437,12 +5437,6 @@
         "blue_carbuncle_017",
         "red_headed_league_032"
     ],
-    "dia": [
-        "red_headed_league_019",
-        "red_headed_league_020",
-        "red_headed_league_034",
-        "red_headed_league_046"
-    ],
     "diamond": [
         "blue_carbuncle_012",
         "speckled_band_049"
@@ -6320,7 +6314,7 @@
     "encompass": [
         "speckled_band_007"
     ],
-    "encyclop": [
+    "encyclopaedia": [
         "red_headed_league_019",
         "red_headed_league_020",
         "red_headed_league_034",
@@ -14554,6 +14548,9 @@
     "odour": [
         "blue_carbuncle_010"
     ],
+    "oeuvre": [
+        "red_headed_league_050"
+    ],
     "of": [
         "blue_carbuncle_001",
         "blue_carbuncle_002",
@@ -22525,9 +22522,6 @@
     "utmost": [
         "red_headed_league_001",
         "red_headed_league_044"
-    ],
-    "uvre": [
-        "red_headed_league_050"
     ],
     "vacancies": [
         "red_headed_league_010",
